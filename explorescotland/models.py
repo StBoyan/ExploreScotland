@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 # Reduce max length of most attributes...
 class ParentUser(models.Model):
     user = models.OneToOneField(User)
 
 class Feedback(models.Model):
     message = models.CharField(max_length=2000)
-    date = models.DateTimeField(default=datetime.date.today()) # may need to import something here
+    date = models.DateTimeField(default=timezone.now()) # may need to import something here
     parent = models.ForeignKey(ParentUser)
 
 class ChildProfile(models.Model):           # Will probably need some attributes or more likely another model
