@@ -54,6 +54,8 @@ def parent_login(request):
     else:
         return render(request, 'explorescotland/login.html', {})
 # Further functions need to be decorated with login_required eventually
+def parentlogin(request):
+    return render(request,'explorescotland/parentlogin.html',{})
 def userHomePage (request):
     return render(request, 'explorescotland/userHomePage.html', {})
 

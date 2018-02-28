@@ -25,5 +25,7 @@ urlpatterns = [
     url(r'^Home/', views.userHomePage, name='homePage'),
     url(r'^Scot/', views.scot, name='scot'),
     url(r'^Lily/', views.lily, name='lily'),
+    url(r'^parentlogin/',views.parentlogin,name='parent'),
+
 
 ]
