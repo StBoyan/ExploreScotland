@@ -3,8 +3,8 @@ from explorescotland import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
-    url(r'^$', views.userHomePage, name='homePage'),
-    url(r'^$', views.scot, name='Scot'),
-    url(r'^$', views.lily, name='Lily'),
+    url(r'^userHomePage/', views.userHomePage, name='homePage'),
+    url(r'^personaScot/', views.scot, name='scot'),
+    url(r'^personaLily/', views.lily, name='lily'),
 
 ]

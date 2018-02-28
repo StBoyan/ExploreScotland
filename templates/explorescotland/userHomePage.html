@@ -9,20 +9,18 @@
     <h1> Welcome Back!</h1>
     <h2> Please choose what you want to do now: </h2>
 
-    <a href="{% url 'home' %}">Restricted Page</a>
     <button class="btn btn-primary"
-        onClick=<a href="/explorescotland/home/"></a>
-        I am a Parent
-    </button>
-    </br>
+        onClick="location.href='{% url 'scot' %}'">
+        Parent
+    </button> </br>
 
     <button class="btn btn-primary"
-        onClick="<a href="{% url 'home' %}"></a>"
+        onClick="location.href='{% url 'lily' %}'">
         Kid1 name
     </button> </br>
 
     <button class="btn btn-primary"
-        onClick=<a href="/explorescotland/home/"></a>
+        onClick="location.href='{% url 'home' %}'">
         Kid2 name
     </button>
 

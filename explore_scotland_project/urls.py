@@ -22,8 +22,8 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^explorescotland/', include('explorescotland.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^userHomePage', views.userHomePage, name='homePage'),
-    url(r'^personaScot', views.scot, name='scot'),
-    url(r'^personaLily', views.lily, name='lily'),
+    url(r'^userHomePage/', views.userHomePage, name='homePage'),
+    url(r'^personaScot/', views.scot, name='scot'),
+    url(r'^personaLily/', views.lily, name='lily'),
 
 ]

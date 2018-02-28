@@ -9,6 +9,10 @@
     </title>
   </head>
 <body style="background-color:powderblue;">    <div>
+    <button class="btn btn-primary"
+        onClick="location.href='{% url 'homePage' %}'">
+        Back to Home Screen
+    </button> </br>
     {% block picture_block %}
     {% endblock %}
 
