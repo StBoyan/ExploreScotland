@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <title>
+      Explore Scotland - Talk to your Buddy
+      {% block title_block %}
+      {% endblock %}
+    </title>
+  </head>
+<body style="background-color:powderblue;">    <div>
+    {% block picture_block %}
+    {% endblock %}
+
+    {% block name_block %}
+    {% endblock %}
+
+      {% block body_block %}
+      {% endblock %}
+    </div>
+  </body>
+</html>
