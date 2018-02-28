@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth.models import userHomePage
+from django.contrib.auth.models import User
+from explorescotland.models import ParentProfile
 
 class ParentForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -11,3 +12,4 @@ class ParentForm(forms.ModelForm):
 class ParentProfileForm(forms.ModelForm): # If ParentProfile is removed - this should go too
     class Meta:
         model = ParentProfile
+        fields = ()

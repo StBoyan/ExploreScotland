@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from explorescotland.forms import ParentForm, ParentProfileForm
+from django.contrib.auth import authenticate, login, logout
+from django.core.urlresolvers import reverse
 
 def home(request):
     return render(request, 'explorescotland/home.html', {})
@@ -49,7 +52,7 @@ def parent_login(request):
         else:
             return HttpResponse("Invalid username or password. Please try again.")
     else:
-        return render(request, 'explorescotland/signup.html', {})
+        return render(request, 'explorescotland/login.html', {})
 # Further functions need to be decorated with login_required eventually
 def userHomePage (request):
     return render(request, 'explorescotland/userHomePage.html', {})
