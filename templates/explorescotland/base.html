@@ -7,8 +7,32 @@
       {% block title_block %}
       {% endblock %}
     </title>
+    <style>
+      .header{
+      color: white;
+      font-size: 40px;
+      text-align: center;
+      border: 3px solid white;
+      }
+
+      .navbar{
+      color: white;
+      font-size: 30px;
+      text-align: center;
+      border: 3px solid black;
+      }
+    </style>
   </head>
-  <body>
+<body style="background-color:powderblue;">
+  <div class="header">
+    {% block header_block %}
+    {% endblock %}
+  </div>
+
+  <div class="navbar">
+    {% block navbar_block %}
+    {% endblock %}
+  </div>
     <div>
       {% block body_block %}
       {% endblock %}

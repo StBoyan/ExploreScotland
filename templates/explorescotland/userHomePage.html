@@ -1,28 +1,51 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
+{% extends 'explorescotland/base.html' %}
 
-    <title>Explore Scotland - Home</title>
+<head>
+    <style>
+
+    h2 {
+    font-family: verdana;
+    font-size: 20px;
+    text-align: center;
+
+    }
+    .buttonParent {
+    text-align: center;
+    border: 3px solid white;
+}
+    </style>
+
+    {% block title_block %}
+    Home
+    {% endblock %}
 </head>
-<body style="background-color:powderblue;">
+    {% block header_block %}
     <h1> Welcome Back!</h1>
+    {% endblock %}
+
+    {% block body_block %}
     <h2> Please choose what you want to do now: </h2>
 
-    <button class="btn btn-primary"
+    <div class="buttonParent">
+        <button class="btn btn-primary"
         onClick="location.href='{% url 'scot' %}'">
         Parent
-    </button> </br>
-
-    <button class="btn btn-primary"
+    </button>
+        <button class="btn btn-primary"
         onClick="location.href='{% url 'lily' %}'">
         Kid1 name
-    </button> </br>
-
-    <button class="btn btn-primary"
+    </button>
+        <button class="btn btn-primary"
         onClick="location.href='{% url 'home' %}'">
         Kid2 name
     </button>
+        </div>
+
+    {% endblock %}
+
+
+
+
 
 </body>
 </html>
