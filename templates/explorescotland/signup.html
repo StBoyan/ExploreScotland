@@ -1,0 +1,21 @@
+{% extends 'explorescotland/base.html' %}
+
+{% block title_block %}
+  Sign Up
+{% endblock %}
+
+{% block body_block %}
+  <h1>Sign up to Explore Scotland</h1>
+  {% if registered %}
+    Your account has been created!
+    <a href="{% url 'home' %}">Proceed to the user area.</a><br />  <!-- Need to change to a button to go to user area or have an automatic redirect if possible -->
+    {% else %}
+    <form id="user_form" method="post" action="{% url 'signup' %}"
+      enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ user_form.as_p }}
+      {{ profile_form.as_p }}
+      <input type="submit" name="submit" value="Sign Up" />
+  </form>
+  {% endif %}
+{% endblock %}

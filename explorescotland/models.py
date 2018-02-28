@@ -1,17 +1,17 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User     # Need to include __str__ functions (same as toString)
 from django.utils import timezone
 # Reduce max length of most attributes...
-class ParentUser(models.Model):
-    user = models.OneToOneField(User)
+class ParentProfile(models.Model):         # This model may actually be unnecessary if there is
+    user = models.OneToOneField(User)   # nothing else stored in here (e.g. profile pic)
 
 class Feedback(models.Model):
     message = models.CharField(max_length=2000)
     date = models.DateTimeField(default=timezone.now()) # may need to import something here
-    parent = models.ForeignKey(ParentUser)
+    parent = models.ForeignKey(ParentProfile)
 
 class ChildProfile(models.Model):           # Will probably need some attributes or more likely another model
-    parent = models.ForeignKey(ParentUser)  # to store the kids results for display in statistics (for parents)
+    parent = models.ForeignKey(ParentProfile)  # to store the kids results for display in statistics (for parents)
     name = models.CharField(max_length=128)
     level = models.IntegerField(default=1)  # Assume kids start level 1. This field is probably wrong.. need to look into  how to access level
 
