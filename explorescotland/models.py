@@ -1,10 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User     # Need to include __str__ functions (same as toString)
+from django.contrib.auth.models import User     # TODO Need to include __str__ functions (same as toString)
 from django.utils import timezone
 # Reduce max length of most attributes...
-class ParentProfile(models.Model):         # This model may actually be unnecessary if there is
-    user = models.OneToOneField(User)   # nothing else stored in here (e.g. profile pic)
-
+class ParentProfile(models.Model):      # This model may actually be unnecessary if there is
+    user = models.OneToOneField(User)   # nothing else stored in here (e.g. profile pic); Also with current login module this is probably
+                                        # not created when an account is registered. TODO need to see how to link all together
 class Feedback(models.Model):
     message = models.CharField(max_length=2000)
     date = models.DateTimeField(default=timezone.now()) # may need to import something here

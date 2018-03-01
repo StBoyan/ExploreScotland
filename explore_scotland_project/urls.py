@@ -17,15 +17,20 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include
 from explorescotland import views
+from registration.backends.simple.views import RegistrationView
+
+class MyRegistrationView(RegistrationView):
+    def get_sucess_url(self, user):
+        return '/explorescotland/' #TODO need to change this to wherever the user lands after they register
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^explorescotland/', include('explorescotland.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^Home/', views.userHomePage, name='homePage'),
+    url(r'^accounts/register/$', MyRegistrationView.as_view(), name='registration_register'),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^Home/', views.userHomePage, name='homePage'), # TODO All patterns below need to be deleted from here
     url(r'^Scot/', views.scot, name='scot'),
     url(r'^Lily/', views.lily, name='lily'),
     url(r'^parentlogin/',views.parentlogin,name='parent'),
-
-
 ]

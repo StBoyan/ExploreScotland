@@ -4,13 +4,19 @@
   Home
 {% endblock %}
 
-
 {% block header_block %}
 <h1> Welcome to Explore Scotland! </h1>
 {% endblock %}
 
+{% block navbar_block %}
+  <div class="topnav">
+    <a href={% url 'auth_login' %}>Login</a>
+    <a href={% url 'registration_register' %}>Sign Up</a>
+  </div>
+{% endblock %}
+
 {% block body_block %}
 
-<br /> Site under construction
+<br /> Group of highly trained monkeys are busy constructing this website.
 
 {% endblock %}
