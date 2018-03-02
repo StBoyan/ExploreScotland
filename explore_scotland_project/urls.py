@@ -34,5 +34,5 @@ urlpatterns = [
     url(r'^Lily/', views.lily, name='lily'),
     url(r'^parentlogin/',views.parentlogin,name='parent'),
     url(r'^googlemap/',views.googlemap,name='googlemap'),
-    
+
 ]
