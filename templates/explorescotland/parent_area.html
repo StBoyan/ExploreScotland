@@ -11,4 +11,14 @@
 {% block body_block %}
 <br /> If you are reading this you are probably logged in.
 <br /> It it still under construction. Here you can adjust profile settings and view your kids' performance.
+<div class="buttonParent">
+    <button class="btn btn-primary"
+    onClick="location.href='{% url 'auth_password_change' %}'">
+    Change Password
+</button>
+<div class="buttonParent">
+    <button class="btn btn-primary"
+    onClick="location.href='{% url 'feedback' %}'">
+    Leave Feedback
+</button>
 {% endblock %}

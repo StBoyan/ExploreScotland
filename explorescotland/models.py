@@ -1,10 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User     # TODO Need to include __str__ functions (same as toString)
 from django.utils import timezone
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 # Reduce max length of most attributes...
-class ParentProfile(models.Model):      # This model may actually be unnecessary if there is
-    user = models.OneToOneField(User)   # nothing else stored in here (e.g. profile pic); Also with current login module this is probably
-                                        # not created when an account is registered. TODO need to see how to link all together
+class ParentProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
 class Feedback(models.Model):
     message = models.CharField(max_length=2000)
     date = models.DateTimeField(default=timezone.now()) # may need to import something here
@@ -35,3 +37,13 @@ class QuizQuestion(models.Model):   # some sort of Questionid may be needed here
     incorrectAnswer2 = models.CharField(max_length=128) # E.g. "Loch Awe"
     incorrectAnswer3 = models.CharField(max_length=128) # E.g. "Loch Katrine"
     subject = models.ForeignKey(MaterialSubject)
+
+# Creates ParentProfile object when creating a new User
+@receiver(post_save, sender=User)
+def create_parent_profile(sender, instance, created, **kwargs):
+    if created:
+        ParentProfile.objects.create(user=instance)
+# Saves the ParentProfile object when a new User is saved
+@receiver(post_save, sender=User)
+def save_parent_profile(sender, instance, **kwargs):
+    instance.parentprofile.save()

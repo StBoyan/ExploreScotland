@@ -1,15 +1,14 @@
 from django import forms
-# from django.contrib.auth.models import User
-# from explorescotland.models import ParentProfile
+from explorescotland.models import Feedback
 
-# class ParentForm(forms.ModelForm):
-#     password = forms.CharField(widget=forms.PasswordInput())
-#
-#     class Meta:
-#         model = User
-#         fields = ('username', 'first_name', 'last_name', 'email', 'password')
-#
-# class ParentProfileForm(forms.ModelForm): # If ParentProfile is removed - this should go too
-#     class Meta:
-#         model = ParentProfile
-#         fields = ()
+class FeedbackForm(forms.ModelForm):
+    # def __init__(self, *args, **kwargs):      #TODO find a way to get user 
+    #     self.user = kwargs.pop('user')
+    #     super(FeedbackForm, self).__init__(*args, **kwargs)
+
+    message = forms.CharField(max_length=2000,
+                                widget=forms.Textarea)
+    # parent = self.user.ParentProfile
+    class Meta:
+        model = Feedback
+        fields = ('message', )
