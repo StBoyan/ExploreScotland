@@ -33,4 +33,6 @@ urlpatterns = [
     url(r'^Scot/', views.scot, name='scot'),
     url(r'^Lily/', views.lily, name='lily'),
     url(r'^parentlogin/',views.parentlogin,name='parent'),
+    url(r'^googlemap/',views.googlemap,name='googlemap'),
+    
 ]

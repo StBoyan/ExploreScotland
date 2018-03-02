@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^userHomePage/', views.userHomePage, name='homePage'),
     url(r'^personaScot/', views.scot, name='scot'),
     url(r'^personaLily/', views.lily, name='lily'),
+    url(r'^googlemap/',views.googlemap,name='googlemap'),
 
 ]

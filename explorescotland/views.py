@@ -23,3 +23,6 @@ def scot (request):
 
 def lily (request):
     return render(request, 'explorescotland/personaLily.html', {})
+def googlemap(request):
+    return render(request,'explorescotland/googlemap.html',{})
+

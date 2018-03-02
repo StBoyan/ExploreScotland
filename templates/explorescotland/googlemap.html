@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% extends 'explorescotland/base.html' %}
+{%load staticfiles%}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+{% block header_block %}
+    Explore Scotland
+    {% endblock %}
+     {% block navbar_block %}
+    {% endblock %}
+
+        {% block body_block %}
+
+<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJn6HyA8TiYUgRFAfDCdj6wec&key=AIzaSyB1T2JHtb2eP2f9OhoMbkg6XshwxtOxUfA" allowfullscreen></iframe>
+
+
+{% endblock %}
+
+</body>
+</html>
