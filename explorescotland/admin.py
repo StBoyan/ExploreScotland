@@ -1,3 +1,8 @@
 from django.contrib import admin
+from explorescotland.models import ParentProfile, Feedback
 
-# Register your models here.
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('message', 'date', 'parent')
+
+admin.site.register(Feedback, FeedbackAdmin)
+admin.site.register(ParentProfile)
