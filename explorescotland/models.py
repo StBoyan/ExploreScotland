@@ -5,8 +5,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 # Reduce max length of most attributes...
 class ParentProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE) # this should hold more data about parent
-                                                                # or be deleted
+    user = models.OneToOneField(User, on_delete=models.CASCADE) # TODO include gender, birthdate
+                                                            
     def __str__(self):
         return self.user.username
 
