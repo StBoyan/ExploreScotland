@@ -9,10 +9,6 @@
     </title>
       <style>
 
-       .backButton {
-    text-align: left;
-    }
-
     .leftColumn{
     float:left;
     width: 25%;
@@ -22,13 +18,14 @@
 
     .chatBox{
     float:right;
-    width: 75%;
+    width: 65%;
     border: 3px solid black;
 
     }
     .card{
     background-color: white;
     padding: 20px;
+    margin-top: 20px
     }
 
 
@@ -37,32 +34,28 @@
 <body style="background-color:powderblue;">    <div>
 
     {% block body_block %}
-   <div class="backButton">
-    <button class="btn btn-primary"
-        onClick="location.href='{% url 'homePage' %}'">
-        Back to Home Screen
-    </button> </br>
-       </div>
-    <div class="leftColumn">
-    <div class="picture">
-    {% block picture_block %}
-    {% endblock %}
-    </div>
 
-    <div class="name">
-    {% block name_block %}
-    {% endblock %}
-    </div>
+    <div class="leftColumn">
+        <div class="picture">
+            {% block picture_block %}
+            {% endblock %}
+        </div>
+
+        <div class="name">
+            {% block name_block %}
+            {% endblock %}
+        </div>
     </div>
 
     <div class="chatBox">
         <div class="card">
-      {% block chat_block %}
-      {% endblock %}
+            {% block chat_block %}
+            {% endblock %}
         </div>
+    </div>
+
     {% endblock %}
 
-    </div>
 </div>
   </body>
 </html>
