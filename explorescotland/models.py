@@ -1,18 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 # Reduce max length of most attributes...
 class ParentProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE) # TODO include gender, birthdate
-                                                            
+    GENDER_CHOICES = (
+    ('', 'Not specified'),
+    ('M', 'Male'),
+    ('F', 'Female'),
+    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default ='')
+    birthdate = models.DateField(null=True)
+
     def __str__(self):
         return self.user.username
 
 class Feedback(models.Model):
     message = models.CharField(max_length=2000)
-    date = models.DateTimeField(default=timezone.now()) # may need to import something here
+    date = models.DateTimeField(auto_now_add=True)
     parent = models.ForeignKey(User)
 
 class ChildProfile(models.Model):           # TODO Will probably need some attributes or more likely another model

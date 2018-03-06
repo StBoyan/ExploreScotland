@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from explorescotland.forms import FeedbackForm, ProfileForm
-from explorescotland.models import Feedback
+from explorescotland.forms import FeedbackForm, UserForm, ProfileForm
+from explorescotland.models import Feedback, ParentProfile
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
@@ -36,33 +36,45 @@ def feedback(request):
 @login_required
 def view_profile(request):
     context_dict = {}
+    user = request.user
+    parent = ParentProfile.objects.get(user=user)
 
-    username = request.user.username
-    context_dict['username'] = username
-    first_name = request.user.first_name
-    context_dict['first_name'] = first_name
-    last_name = request.user.last_name
-    context_dict['last_name'] = last_name
-    email = request.user.email
-    context_dict['email'] = email
+    context_dict['user'] = user
+    context_dict['parent'] = parent
 
     return render(request, 'explorescotland/profile.html', context_dict)
 
+@login_required
 def edit_profile(request):
-    form = ProfileForm(instance=request.user)
+    context_dict ={}
+    user_form = UserForm(instance=request.user)
+    context_dict['user_form'] = user_form
+    parent = ParentProfile.objects.get(user=request.user)
+    profile_form = ProfileForm(instance=parent)
+    context_dict['profile_form'] = profile_form
 
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=request.user)
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=parent)
 
-        if form.is_valid():
-            form.save(commit=True)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save(commit=True)
+            profile_form.save(commit=True)
 
             return HttpResponseRedirect(reverse('view_profile')) #Can redirect to confirmation page
         else:
-            print(form.errors)
+            print(user_form.errors, profile_form.errors)
 
-    return render(request, 'explorescotland/edit_profile.html', {'form': form})
+    return render(request, 'explorescotland/edit_profile.html', context_dict)
 
+def manage_children(request):
+    return render(request, 'explorescotland/manage_children.html', {})
+
+def add_child(request):
+    return render(request, 'explorescotland/add_child.html', {})
+
+def children_performance(request):
+    return render(request, 'explorescotland/children_performance.html', {})
 
 def parentlogin(request):
     return render(request,'explorescotland/parentlogin.html',{})

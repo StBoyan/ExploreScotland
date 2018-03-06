@@ -9,10 +9,12 @@
 {% endblock %}
 
 {% block body_block %}
-  <p><strong>Username : {{ username }}</strong><p>
-  <p>First Name : {{ first_name }}<p>
-  <p>Last Name : {{ last_name }}<p>
-  <p>Email : {{ email }}<p>
+  <p><strong>Username : {{ user.username }}</strong></p>
+  <p>First Name : {{ user.first_name }}</p>
+  <p>Last Name : {{ user.last_name }}</p>
+  <p>Email : {{ user.email }}</p>
+  <p>Date of Birth : {{ parent.birthdate }}</p>
+  <p>Gender : {{ parent.get_gender_display }}</p>
   <div class="buttonParent">
       <button class="btn btn-primary"
       onClick="location.href='{% url 'edit_profile' %}'">
