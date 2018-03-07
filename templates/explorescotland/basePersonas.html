@@ -2,38 +2,20 @@
 {% load staticfiles %}
 <html>
   <head>
+
     <title>
       Explore Scotland - Talk to your Buddy
       {% block title_block %}
       {% endblock %}
     </title>
-      <style>
 
-    .leftColumn{
-    float:left;
-    width: 25%;
-    padding: 40px;
-    }
-
-
-    .chatBox{
-    float:right;
-    width: 65%;
-    border: 3px solid black;
-
-    }
-    .card{
-    background-color: white;
-    padding: 20px;
-    margin-top: 20px
-    }
-
-
-    </style>
   </head>
-<body style="background-color:powderblue;">    <div>
+<body>
 
     {% block body_block %}
+      <link rel="stylesheet" href="{% static 'css/personas.css' %}">
+        <script src=personas.js> </script>
+
 
     <div class="leftColumn">
         <div class="picture">
@@ -44,11 +26,27 @@
         <div class="name">
             {% block name_block %}
             {% endblock %}
+
         </div>
     </div>
 
-    <div class="chatBox">
+    <div class="rightColumn">
         <div class="card">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="imagePersona">
+                        <img src="{% static "img/Lily.jpg" %}" class="media-object" style="width:60px">
+                    </div>
+                    <p> Hey! How are you djjjjjjjjjjjjjjjjjjjjjjjjjj <br> hfffffffffff</p>
+                </div>
+            </div>
+            <br>
+                <div class="panel panel-default">
+                    <div class="panel-body2">
+                        <p> I'm good. Thanks </p>
+                    </div>
+                </div>
+
             {% block chat_block %}
             {% endblock %}
         </div>
@@ -56,6 +54,5 @@
 
     {% endblock %}
 
-</div>
-  </body>
+</body>
 </html>
