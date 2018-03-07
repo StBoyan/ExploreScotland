@@ -1,0 +1,5 @@
+db.sqlite3
+explorescotland/migrations/
+__pycache__/
+*.pyc
+.idea/

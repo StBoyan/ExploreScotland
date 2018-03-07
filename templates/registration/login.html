@@ -1,0 +1,22 @@
+{% extends 'explorescotland/base.html' %}
+
+{% block title_block %}
+  Login
+{% endblock %}
+
+{% block header_block %}
+<h1> Login to Explore Scotland </h1>
+{% endblock %}
+
+{% block body_block %}
+  <form method="post" action=".">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Log in" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+  <p>
+    Don't have an account?
+    <a href="{% url 'registration_register' %}">Sign up</a>
+  </p>
+{% endblock %}

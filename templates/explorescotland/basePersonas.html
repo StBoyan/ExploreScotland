@@ -1,0 +1,61 @@
+{% extends 'explorescotland/base.html' %}
+{% load staticfiles %}
+<html>
+  <head>
+    <title>
+      Explore Scotland - Talk to your Buddy
+      {% block title_block %}
+      {% endblock %}
+    </title>
+      <style>
+
+    .leftColumn{
+    float:left;
+    width: 25%;
+    padding: 40px;
+    }
+
+
+    .chatBox{
+    float:right;
+    width: 65%;
+    border: 3px solid black;
+
+    }
+    .card{
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px
+    }
+
+
+    </style>
+  </head>
+<body style="background-color:powderblue;">    <div>
+
+    {% block body_block %}
+
+    <div class="leftColumn">
+        <div class="picture">
+            {% block picture_block %}
+            {% endblock %}
+        </div>
+
+        <div class="name">
+            {% block name_block %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="chatBox">
+        <div class="card">
+            {% block chat_block %}
+            {% endblock %}
+        </div>
+    </div>
+
+    {% endblock %}
+
+</div>
+  </body>
+</html>

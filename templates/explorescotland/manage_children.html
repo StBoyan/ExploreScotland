@@ -1,0 +1,23 @@
+{% extends 'explorescotland/base.html' %}
+
+{% block title_block %}
+  Children Management
+{% endblock %}
+
+{% block header_block %}
+<h1> Manage your Children </h1>
+{% endblock %}
+
+{% block body_block %}
+  <p> Here all kids belonging to the parent will be displayed along with a button to remove them. </p>
+  <div class="buttonParent">
+      <button class="btn btn-primary"
+      onClick="location.href='{% url 'add_child' %}'">
+      Add Child
+  </button>
+  <div class="buttonParent">
+      <button class="btn btn-primary"
+      onClick="location.href='{% url 'children_performance' %}'">
+      Children Performance
+  </button>
+{% endblock %}
