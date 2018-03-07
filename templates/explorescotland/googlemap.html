@@ -2,13 +2,6 @@
 {% extends 'explorescotland/base.html' %}
 {%load staticfiles%}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-
-<body>
 {% block header_block %}
     Explore Scotland
     {% endblock %}
@@ -16,10 +9,19 @@
     {% endblock %}
 
         {% block body_block %}
+<style>
+        .card{
+            overflow-y: scroll;
+                border: 3px solid black;
+                height: 500px
+
+        }
+    </style>
 <div>
 
+    <div class="card">
 <img src="https://maps.googleapis.com/maps/api/staticmap?center=Scotland,UK&zoom=7&size=1000x1000&key=AIzaSyD9s63K87G4opLnDMu-exTPfU4csnQBXk8">
-
+    </div>
 
 
 </div>
