@@ -2,7 +2,9 @@
     .leftColumn{
     float:left;
     width: 25%;
-    padding: 30px;
+    padding-left: 60px;
+    padding-top: 30px;
+
     }
 
     .picture{
@@ -17,6 +19,7 @@
     }
 
     .card{
+    overflow-y: scroll;
     background-color: #B0E0E6;
     border: 3px solid black;
     height: 500px
@@ -40,5 +43,10 @@
         float:right;
         border-radius: 25px;
         padding: 6px;
+    }
+
+    .buttons{
+            border:3px solid black;
 
     }
+

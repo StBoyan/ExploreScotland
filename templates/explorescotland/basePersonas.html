@@ -47,8 +47,23 @@
                     </div>
                 </div>
 
+
             {% block chat_block %}
             {% endblock %}
+        </div>
+  <div class="buttons">
+        <button class="btn btn-primary"
+        onClick="location.href='{% url 'scot' %}'">
+        Im good! Thank you!
+    </button>
+        <button class="btn btn-primary"
+        onClick="location.href='{% url 'lily' %}'">
+        Great! How are you today?
+    </button>
+        <button class="btn btn-primary"
+        onClick="location.href='{% url 'home' %}'">
+        Superb! I'm happy to see you again!
+    </button>
         </div>
     </div>
 
