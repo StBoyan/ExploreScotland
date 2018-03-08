@@ -1,0 +1,51 @@
+
+    .leftColumn{
+    float:left;
+    width: 25%;
+    padding-left: 60px;
+    padding-top: 30px;
+
+    }
+
+    .picture{
+     border: 3px solid black;
+
+    }
+
+    .rightColumn{
+    float:right;
+    width: 65%;
+    padding: 30px;
+    }
+
+    .card{
+    overflow-y: scroll;
+    background-color: #B0E0E6;
+    border: 3px solid black;
+    height: 500px
+    }
+
+    .panel-body{
+        border-radius: 25px;
+        background-color: white;
+        border:1px solid black;
+        float:left;
+        padding: 6px;
+    }
+
+    .imagePersona{
+        float:left;
+    }
+
+    .panel-body2{
+        background-color: #FFB6C1;
+        border:1px solid black;
+        float:right;
+        border-radius: 25px;
+        padding: 6px;
+    }
+
+    .buttons{
+            border:3px solid black;
+
+    }
