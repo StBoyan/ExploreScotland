@@ -1,57 +1,65 @@
-<!DOCTYPE html>
 {% extends 'explorescotland/base.html' %}
 {%load staticfiles%}
-
 <body>
 {% block header_block %}
     Explore Scotland
     {% endblock %}
-     {% block navbar_block %}
-    {% endblock %}
 
         {% block body_block %}
 <style>
-        .card{
-            overflow-y: scroll;
-            float:left;
-            border: 3px solid black;
-            height: 500px;
-            width: 49%;
-        }
-        .texting{
-            overflow-y: scroll;
-            height: 500px;
-            float: right;
-            width: 50%;
-            border: 3px solid black;
-            background-color: white;
-        }
-        @media (max-width: 800px) {
-    .card, .texting {
+      #map {
+        height: 500px;
         width: 100%;
-        padding: 0;
-    }
-}
+       }
+
+
 </style>
 
+<div id="map"></div>
+    <script>
+      function initMap() {
+        var glasgow = {lat: 55.868409, lng:-4.290229};
+         var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 6,
+          center:glasgow,
+          gestureHandling: 'none',
+          zoomControl: false
 
-    <div class="card">
-<img src="https://maps.googleapis.com/maps/api/staticmap?center=Scotland,UK&zoom=7&size=1000x1000
-&markers=size:large%7Ccolor:blue%7Clabel:G%7CGlasgow
-&markers=size:large%7Ccolor:yellow%7Clabel:E%7CEdinburgh
-&markers=size:large%7Ccolor:green%7Clabel:S%7CSt Andrews
-&markers=size:large%7Ccolor:orange%7Clabel:L%7CLoch Ness
-&markers=size:large%7Ccolor:green%7Clabel:A%7CAberdeen
-&markers=size:exlarge%7Ccolor:purple%7Clabel:C%7CCairngorms Park
+          });
+            var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+'<h1 id="Glasgow"class "firstHeading">Glasgow</h1>'+
+'<div id="bodyContent">'+
+'<p>Glasgow is the largest city in Scotland.'+
+'Glasgow itself was reputed to have been founded by the Christian missionary Saint Mungo in the 6th century.'+
+ 'He established a church on the Molendinar Burn, where the present Glasgow Cathedral stands,' +
+',and in the following years Glasgow became a religious centre. Glasgow grew over the following centuries'+
+      '.</p>'+
+      '</div>'+
+      '</div>';
 
-&key=AIzaSyC8Y15HBIJSOBORvZ3gQk0Np38KQ9g4Ugk">
-    </div>
-
-    <div class="texting">
-        <p> The information for the places will be be displayed here!</p>
-    </div>
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
 
 
+        var marker = new google.maps.Marker({
+          position: glasgow,
+          map: map
+
+        });
+
+
+      marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+}
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4OKqDu4KBZloKYGO4c7RlJtLSLIK6Vvo&callback=initMap">
+    </script>
 
 {% endblock %}
 
