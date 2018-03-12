@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-# Reduce max length of most attributes...
+
 class ParentProfile(models.Model):
     GENDER_CHOICES = (
     ('', 'Not specified'),
@@ -17,47 +17,35 @@ class ParentProfile(models.Model):
         return self.user.username
 
 class Feedback(models.Model):
-    message = models.CharField(max_length=2000)
+    message = models.TextField(null=False)
     date = models.DateTimeField(auto_now_add=True)
     parent = models.ForeignKey(User)
 
-class ChildProfile(models.Model):           # TODO Will probably need some attributes or more likely another model
-    parent = models.ForeignKey(User)  # to store the kids results for display in statistics (for parents)
-    name = models.CharField(max_length=128)
-    level = models.IntegerField(default=1)  # Assume kids start level 1. This field is probably wrong.. need to look into  how to access level
+class ChildProfile(models.Model):
+    parent = models.ForeignKey(User)
+    name = models.CharField(max_length=40, null=False)
+    level = models.IntegerField(default=1)
 
     def __str__(self):
         return self.name
 
-class Level(models.Model):  # TODO Need to find out how to access model ID
-    name = models.CharField(max_length=128, unique=True) # E.g. "Level 1"
-# Level and MaterialSubject may be optimised... need to consider this
-    def __str__(self):
-        return self.name
+class Level(models.Model):
+    number = models.IntegerField(primary_key=True) # E.g. "1"
+    topic = models.CharField(max_length=50, unique=True) # E.g. "Glasgow"
+    content = models.TextField(null=False) # E.g. "Glasgow is the biggest city in Scotland..."
+    numOfQuestions = models.IntegerField(null=False) # How many questions will this level have
 
-class MaterialSubject(models.Model):
-    name = models.CharField(max_length=128, unique=True) # E.g. "Lochs of Scotland"
+    def __str__(self):
+        return self.number
+
+class QuizQuestion(models.Model):
+    question_id = models.IntegerField(primary_key=True) # E.g. 1,2,3.. Up to number of questions for the relevant Level (not enforced by database)
+    question = models.CharField(max_length=128, unique=True) # E.g. "When was University of Glasgow established?"
+    correctAnswer = models.CharField(max_length=128) # E.g. "1451"
+    incorrectAnswer1 = models.CharField(max_length=128) # E.g "1285"
+    incorrectAnswer2 = models.CharField(max_length=128) # E.g. "1613"
+    incorrectAnswer3 = models.CharField(max_length=128) # E.g. "1771"
     level = models.ForeignKey(Level)
-
-    def __str__(self):
-        return self.name
-
-class Material(models.Model):
-    name = models.CharField(max_length=128, unique=True) # E.g. "Loch Lomond" [attribute not in original ER]
-    content = models.CharField(max_length=2000) # E.g. "Loch Lomond is the biggest loch in Scotland..."
-    subject = models.ForeignKey(MaterialSubject)
-
-    def __str__(self):
-        return self.name
-
-class QuizQuestion(models.Model):   # some sort of Questionid may be needed here
-    difficulty = models.IntegerField(default=0) #may need to drop this one
-    question = models.CharField(max_length=128, unique=True) # E.g. "What is the biggest loch in Scotland?"
-    CorrectAnswer = models.CharField(max_length=128) # E.g. "Loch Lomond"
-    incorrectAnswer1 = models.CharField(max_length=128) # E.g "Loch Ness"
-    incorrectAnswer2 = models.CharField(max_length=128) # E.g. "Loch Awe"
-    incorrectAnswer3 = models.CharField(max_length=128) # E.g. "Loch Katrine"
-    subject = models.ForeignKey(MaterialSubject)
 
     def __str__(self):
         return self.question
