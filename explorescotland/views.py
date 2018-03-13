@@ -90,7 +90,8 @@ def manage_children(request):
 
 @login_required
 def view_children(request):
-    children = ChildProfile.objects.all()
+    user = request.user
+    children = user.childprofile_set.all()
 
     return render(request, 'explorescotland/view_children.html', {'children': children})
 

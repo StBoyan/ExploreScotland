@@ -10,18 +10,24 @@
 
 {% block body_block %}
 <br />
-  <table width="40%", border="1">
-    <tr>
-      <th>Child Name</th>
-      <th>Progress</th>
-      <th></th>
-    </tr>
-  {% for child in children %}
-    <tr>
-      <td>{{ child.name }}</td>
-      <td>Level {{ child.level }}</td>
-      <td><form><input type=submit value="Delete" style="width:100%"></form></td>
-    </tr>
-  {% endfor %}
-  </table>
+  {% if children %}
+    <table width="40%", border="1">
+      <tr>
+        <th>Child Name</th>
+        <th>Progress</th>
+        <th></th>
+      </tr>
+    {% for child in children %}
+      <tr>
+        <td>{{ child.name }}</td>
+        <td>Level {{ child.level }}</td>
+        <td><form><input type=submit value="Delete" style="width:100%"></form></td>
+      </tr>
+    {% endfor %}
+    </table>
+  {% else %}
+  <strong>You havent registered any children yet!</strong> <br/>
+  <a href="{% url 'add_child' %}">Add a child here</a>
+  {% endif %}
+
 {% endblock %}
