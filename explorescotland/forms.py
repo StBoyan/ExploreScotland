@@ -1,5 +1,5 @@
 from django import forms
-from explorescotland.models import Feedback, ParentProfile
+from explorescotland.models import Feedback, ParentProfile, ChildProfile
 from django.contrib.auth.models import User
 from django.forms import extras, SelectDateWidget
 import datetime
@@ -32,3 +32,10 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = ParentProfile
         fields = ('birthdate', 'gender')
+
+class ChildForm(forms.ModelForm):
+    name  = forms.CharField(label='Child Name')
+
+    class Meta:
+        model = ChildProfile
+        fields = ('name', )

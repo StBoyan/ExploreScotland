@@ -9,5 +9,14 @@
 {% endblock %}
 
 {% block body_block %}
-  <p> Here you will be able to add a child to your profile </p>
+  <br /> Your child's learning adventure begins here! Enter his or her name!
+  <form id="child_form" method="post" action="{% url 'add_child' %}">
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+      {{ field.errors }}
+        <br />{{ field.label }}
+      {{ field }}
+    {% endfor %}
+    <input type="submit" name="submit" value="Add Child" />
+  </form>
 {% endblock %}

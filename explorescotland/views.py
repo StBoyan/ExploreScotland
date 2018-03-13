@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from explorescotland.forms import FeedbackForm, UserForm, ProfileForm
+from explorescotland.forms import FeedbackForm, UserForm, ProfileForm, ChildForm
 from explorescotland.models import Feedback, ParentProfile
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -67,6 +67,23 @@ def edit_profile(request):
 
     return render(request, 'explorescotland/edit_profile.html', context_dict)
 
+@login_required
+def add_child(request):
+    form = ChildForm()
+
+    if request.method == 'POST':
+        # Links current user to the child
+        child = ChildProfile(parent=request.user)
+        form = ChildForm(request.POST, instance=child)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return HttpResponseRedirect(reverse('parent_area')) #Can make this redirect to a confirmation page
+        else:
+            print(form.errors)
+
+    return render(request, 'explorescotland/add_child.html', {'form': form})
+
 def manage_children(request):
     return render(request, 'explorescotland/manage_children.html', {})
 
@@ -75,9 +92,6 @@ def add_child(request):
 
 def children_performance(request):
     return render(request, 'explorescotland/children_performance.html', {})
-
-def parentlogin(request):
-    return render(request,'explorescotland/parentlogin.html',{})
 
 def userHomePage (request):
     return render(request, 'explorescotland/userHomePage.html', {})

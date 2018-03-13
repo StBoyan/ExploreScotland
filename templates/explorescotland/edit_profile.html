@@ -10,7 +10,7 @@
 
 {% block body_block %}
   <div>
-    <form id="profile_form" method="post" action="/explorescotland/profile/edit/">
+    <form id="profile_form" method="post" action="{% url 'edit_profile' %}">
       {% csrf_token %}
       {% for field in user_form.visible_fields %}
         {{ field.errors }}
