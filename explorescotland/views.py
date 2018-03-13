@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from explorescotland.forms import FeedbackForm, UserForm, ProfileForm, ChildForm
-from explorescotland.models import Feedback, ParentProfile
+from explorescotland.models import Feedback, ParentProfile, ChildProfile
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
@@ -84,14 +84,15 @@ def add_child(request):
 
     return render(request, 'explorescotland/add_child.html', {'form': form})
 
+@login_required
 def manage_children(request):
     return render(request, 'explorescotland/manage_children.html', {})
 
-def add_child(request):
-    return render(request, 'explorescotland/add_child.html', {})
+@login_required
+def view_children(request):
+    children = ChildProfile.objects.all()
 
-def children_performance(request):
-    return render(request, 'explorescotland/children_performance.html', {})
+    return render(request, 'explorescotland/view_children.html', {'children': children})
 
 def userHomePage (request):
     return render(request, 'explorescotland/userHomePage.html', {})

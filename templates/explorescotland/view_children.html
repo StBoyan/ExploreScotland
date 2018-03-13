@@ -1,0 +1,27 @@
+{% extends 'explorescotland/base.html' %}
+
+{% block title_block %}
+  View Children
+{% endblock %}
+
+{% block header_block %}
+<h1> View Children </h1>
+{% endblock %}
+
+{% block body_block %}
+<br />
+  <table width="40%", border="1">
+    <tr>
+      <th>Child Name</th>
+      <th>Progress</th>
+      <th></th>
+    </tr>
+  {% for child in children %}
+    <tr>
+      <td>{{ child.name }}</td>
+      <td>Level {{ child.level }}</td>
+      <td><form><input type=submit value="Delete" style="width:100%"></form></td>
+    </tr>
+  {% endfor %}
+  </table>
+{% endblock %}
