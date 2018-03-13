@@ -17,44 +17,24 @@
 
 <div id="map"></div>
     <script>
+
+
       function initMap() {
-        var glasgow = {lat: 55.868409, lng:-4.290229};
-         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 7,
-          center:glasgow,
-          gestureHandling: 'none',
-          zoomControl: false
-
-          });
-            var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-'<h1 id="Glasgow"class "firstHeading">Glasgow</h1>'+
-'<div id="bodyContent">'+
-'<p>Glasgow is the largest city in Scotland.'+
-'Glasgow itself was reputed to have been founded by the Christian missionary Saint Mungo in the 6th century.'+
- 'He established a church on the Molendinar Burn, where the present Glasgow Cathedral stands,' +
-',and in the following years Glasgow became a religious centre. Glasgow grew over the following centuries'+
-      '.</p>'+
-      '</div>'+
-      '</div>';
-
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
-
-
-        var marker = new google.maps.Marker({
-          position: glasgow,
-          map: map
-
-        });
-
-
-      marker.addListener('click', function() {
-    infowindow.open(map, marker);
+          var latlng={lat:57.337209,lng:-4.159463};
+           var glasgow={lat:55.873490,lng:-4.237273};
+            var edinburgh{};
+      var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 7,
+    center: latlng,
   });
-}
+
+      var marker = new google.maps.Marker({
+    position: glasgow,
+      posiion:edinburgh,
+    map: map,
+         });
+
+        }
 
     </script>
     <script async defer
