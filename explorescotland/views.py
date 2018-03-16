@@ -5,6 +5,9 @@ from explorescotland.forms import FeedbackForm, UserForm, ProfileForm, ChildForm
 from explorescotland.models import Feedback, ParentProfile, ChildProfile
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse
+from django.core import serializers
+
 
 def home(request):
     return render(request, 'explorescotland/home.html', {})
@@ -105,3 +108,12 @@ def lily (request):
     return render(request, 'explorescotland/personaLily.html', {})
 def googlemap(request):
     return render(request,'explorescotland/googlemap.html',{})
+
+
+# Test AJAX thing to show you how it works
+def test_ajax(request):
+    return HttpResponse("This is text from the server!!")
+
+def getQuestion(request):
+    data = serializers.serialize('json', QuizQuestion.objects.all())
+    return HttpResponse(data, content_type="application/json")
