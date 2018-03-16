@@ -1,20 +1,22 @@
 $(document).ready(function(){
 // TODO put in a loop
+getQuestions();
     drawQuestion("Koe e nai sladkoto <3 :D ");
-    updateAnswers("patence", "kuchence", "zaiche", "mishlence");
+    updateAnswers(question.question_id, "kuchence", "zaiche", "mishlence");
 
     $('input').click(function () {
             console.log("button clicked")
                 drawRespond(this.value);
                 resetAnswers();
                 console.log();
-//                storeScore(this.id);
             }
     );
+    console.log(question);
 });
 
     var correctAnswers;
     var wrongAnswers;
+    var question;
 
 // Displays the question in the chatbox
  function drawQuestion(text){
@@ -82,6 +84,21 @@ $(document).ready(function(){
         else
             wrongAnswers++;
  }
+
+ function getQuestions (){
+
+ $('#btn1').click(function() {
+        alert("woop woop");
+
+    $.ajax({
+    url: '/explorescotland/quizzes/',
+    success: function(data) {
+    question = data;
+    }
+    });
+
+    });
+ };
 
 
 $(document).ready(function() {

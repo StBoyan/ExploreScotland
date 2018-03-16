@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from explorescotland.forms import FeedbackForm, UserForm, ProfileForm, ChildForm
-from explorescotland.models import Feedback, ParentProfile, ChildProfile
+from explorescotland.models import Feedback, ParentProfile, ChildProfile, QuizQuestion
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse, JsonResponse
