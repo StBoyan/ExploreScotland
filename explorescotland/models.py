@@ -50,6 +50,13 @@ class QuizQuestion(models.Model):
     def __str__(self):
         return self.question
 
+class textFieldOnMap(models.Model):
+        text=models.CharField()
+
+
+        def __str__(self):
+         return self.text
+
 # Creates ParentProfile object when creating a new User
 @receiver(post_save, sender=User)
 def create_parent_profile(sender, instance, created, **kwargs):
