@@ -1,6 +1,6 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',
-                        'explore_scotland_project')
+                        'explore_scotland_project.settings')
 
 import django
 django.setup()
@@ -70,40 +70,44 @@ def populate():
         {"question_id": 30, "question": "For how long did the Scots and English fight during the Middle Ages?", "correctAnswer": "60", "incorrectAnswer1": "20",
          "incorrectAnswer2": "10", "incorrectAnswer3": "100", "level": "3"}]
 
-    levels = [{"number": 1, "topic": "Glasgow", "content": "", "numOfQuestions": 5},
-              {"number": 2, "topic": "Edinburgh", "content": "", "numOfQuestions": 5},
-              {"number": 3, "topic": "Loch Ness", "content": "", "numOfQuestions": 5},
-              {"number": 4, "topic": "Dundee", "content": "", "numOfQuestions": 5},
-              {"number": 5, "topic": "Aberdeen", "content": "", "numOfQuestions": 5},
-              {"number": 6, "topic": "Stirling", "content": "", "numOfQuestions": 5}]
+    levels = {1: {"topic": "Glasgow", "content": "", "numOfQuestions": 5},
+              2: {"topic": "Edinburgh", "content": "", "numOfQuestions": 5},
+              3: {"topic": "Loch Ness", "content": "", "numOfQuestions": 5},
+              4: {"topic": "Dundee", "content": "", "numOfQuestions": 5},
+              5: {"topic": "Aberdeen", "content": "", "numOfQuestions": 5},
+              6: {"topic": "Stirling", "content": "", "numOfQuestions": 5}}
 
 
-    for level in levels.items():
-        l = add_level(number, topic, content, numOfQuestions]) #TODO ne znam kakvo se sluchva tuk :D
+    for level, level_data in levels.items():
+        l = add_level(level, level_data["topic"], level_data["content"], level_data["numOfQuestions"]) #TODO ne znam kakvo se sluchva tuk :D
         for q in quiz_questions:
-            add_question(l, q["id"], q["question"], q["correctAnswer"], q["incorrectAnswer1"], q["incorrectAnswer2"], q["incorrectAnswer3"])
+            if (q["question_id"] <= len(levels.items()) * level and q["question_id"] > len(levels.items()) * (level-1)):
+                add_question(l, q["question_id"], q["question"], q["correctAnswer"], q["incorrectAnswer1"], q["incorrectAnswer2"], q["incorrectAnswer3"])
 
     for l in Level.objects.all():
         for q in QuizQuestion.objects.filter(level=l):
-            print("- {0} - {1}".format(str(l), str(q)))
+            print("- {0} - {1}".format(l.topic, q.question))
 
 
-def add_level(number, topic, content, numOfQuestions):
-    l = Level.objects.get_or_create(number=number, topic=topic)[0]
+def add_level(number, topic, content, numofquestions):
+    l = Level.objects.get_or_create(number=number, numOfQuestions=numofquestions)[0]
+    l.topic = topic
     l.content = content
-    l.numOfQuestions = numOfQuestions
+    l.numOfQuestions = numofquestions
     l.save()
     return l
 
 
 
-def add_question(id, question, correct, incorrect1, incorrect2, incorrect3):
+def add_question(level, id, question, correct, incorrect1, incorrect2, incorrect3):
+   print("trying to create question with id: ", id, "for level: ", level.number)
    q = QuizQuestion.objects.get_or_create(question_id=id)[0]
    q.question = question
    q.correctAnswer = correct
    q.incorrectAnswer1 = incorrect1
    q.incorrectAnswer2 = incorrect2
    q.incorrectAnswer3 = incorrect3
+   q.level = level
    q.save()
    return q
 
