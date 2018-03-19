@@ -51,7 +51,7 @@ class QuizQuestion(models.Model):
         return self.question
 
 class textFieldOnMap(models.Model):
-        text=models.CharField()
+        text=models.CharField(max_length=1000)
 
 
         def __str__(self):

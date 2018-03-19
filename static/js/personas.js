@@ -2,7 +2,7 @@ $(document).ready(function(){
 // TODO put in a loop
 getQuestions();
     drawQuestion("Koe e nai sladkoto <3 :D ");
-    updateAnswers(question.question_id, "kuchence", "zaiche", "mishlence");
+    updateAnswers("maimunka", "kuchence", "zaiche", "mishlence");
 
     $('input').click(function () {
             console.log("button clicked")
