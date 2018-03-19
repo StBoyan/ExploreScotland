@@ -18,5 +18,6 @@ urlpatterns = [
     url(r'^personaScot/', views.scot, name='scot'),
     url(r'^personaLily/', views.lily, name='lily'),
     url(r'^googlemap/',views.googlemap,name='googlemap'),
+    url(r'^getLevelInformation/$',views.get_level_information, name ="get_level_information"),
 
 ]

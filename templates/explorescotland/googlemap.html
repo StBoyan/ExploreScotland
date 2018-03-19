@@ -8,74 +8,22 @@
         {% block body_block %}
  <link rel="stylesheet" href="{% static 'css/googlemap.css' %}">
 
+
 <div id="map"></div>
-    <script>
 
-
-function initMap() {
-
-    var map = new google.maps.Map(document.getElementById('map'),{
-        center:{lat:57.113387,lng:-3.632542},
-        zoom:7,
-        gestureHandling: 'none'
-  });
-
-
-  var marker1 = new google.maps.Marker({
-    map:map,
-    position:{lat:55.881579,lng:-4.219419},
-
-  });
-
-
-  var marker2=new google.maps.Marker({
-  map:map,
-  position:{lat:55.951570,lng:-3.349419},
-
-
- });
- marker2.setMap(map);
-  var marker3=new google.maps.Marker({
-  map:map,
-  position:{lat:57.362709,lng:-4.386354},
-
-
-  });
-
-  var marker4=new google.maps.Marker({
-  map:map,
-  position:{lat:56.504614,lng:-3.002565},
-
-
-  });
-  marker4.setMap(map);
-  var marker5=new google.maps.Marker({
-  map:map,
-  position:{lat:57.157645,lng:-2.120914},
-
-
-  });
-
-
-  var marker6=new google.maps.Marker({
-  map:map,
-  position:{lat:56.115432,lng:-3.924594},
-
-  });
-
- }
- 
-
-
-    </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4OKqDu4KBZloKYGO4c7RlJtLSLIK6Vvo&callback=initMap">
     </script>
 
-<div id="textField">
+<div id="levelInfoTextField">
+    <textarea rows="100" cols="1000">
+        Choose point on the map to start exploring Scotland!
+    </textarea>
 
 </div>
 
+
+ <script src="{% static 'js/googlemap.js' %}"></script>
 {% endblock %}
 
 </body>

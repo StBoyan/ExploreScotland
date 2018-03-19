@@ -36,7 +36,7 @@ class Level(models.Model):
     numOfQuestions = models.IntegerField(null=False) # How many questions will this level have
 
     def __str__(self):
-        return self.number
+        return str(self.number)
 
 class QuizQuestion(models.Model):
     question_id = models.IntegerField(primary_key=True) # E.g. 1,2,3.. Up to number of questions for the relevant Level (not enforced by database)

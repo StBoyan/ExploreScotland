@@ -2,13 +2,11 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from explorescotland.forms import FeedbackForm, UserForm, ProfileForm, ChildForm
-from explorescotland.models import Feedback, ParentProfile, ChildProfile, QuizQuestion
+from explorescotland.models import Feedback, ParentProfile, ChildProfile, QuizQuestion,Level
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
-from django.views.decorators.csrf import csrf_exempt
-
 
 def home(request):
     return render(request, 'explorescotland/home.html', {})
@@ -82,7 +80,7 @@ def add_child(request):
 
         if form.is_valid():
             form.save(commit=True)
-            return HttpResponseRedirect(reverse('manage_children')) #TODO Can make this redirect to a confirmation page
+            return HttpResponseRedirect(reverse('parent_area')) #Can make this redirect to a confirmation page
         else:
             print(form.errors)
 
@@ -92,16 +90,10 @@ def add_child(request):
 def manage_children(request):
     return render(request, 'explorescotland/manage_children.html', {})
 
-@csrf_exempt
 @login_required
 def view_children(request):
     user = request.user
     children = user.childprofile_set.all()
-
-    # Delete child profile upon button press
-    if request.method == 'POST':
-        child_name = request.POST.get('child', None)
-        ChildProfile.objects.filter(name=child_name, parent=user).delete()
 
     return render(request, 'explorescotland/view_children.html', {'children': children})
 
@@ -113,7 +105,7 @@ def scot (request):
 
 def lily (request):
     return render(request, 'explorescotland/personaLily.html', {})
-    
+
 def googlemap(request):
     return render(request,'explorescotland/googlemap.html',{})
 
@@ -125,3 +117,20 @@ def test_ajax(request):
 def getQuestion(request):
     data = serializers.serialize('json', QuizQuestion.objects.all())
     return HttpResponse(data, content_type="application/json")
+
+
+def get_level_information(request):
+    level_id = None
+    print("reeeequest", request)
+    if request.method == 'GET':
+        level_id = request.GET['level_id']
+
+    text = ''
+    if level_id:
+        level = Level.objects.get(number=int(level_id))
+        if level:
+            text = level.content
+            print("textttttt", text)
+
+
+    return JsonResponse({'content' : text})
