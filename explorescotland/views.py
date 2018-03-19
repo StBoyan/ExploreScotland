@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
 
 
 def home(request):
@@ -81,7 +82,7 @@ def add_child(request):
 
         if form.is_valid():
             form.save(commit=True)
-            return HttpResponseRedirect(reverse('parent_area')) #Can make this redirect to a confirmation page
+            return HttpResponseRedirect(reverse('manage_children')) #TODO Can make this redirect to a confirmation page
         else:
             print(form.errors)
 
@@ -91,10 +92,16 @@ def add_child(request):
 def manage_children(request):
     return render(request, 'explorescotland/manage_children.html', {})
 
+@csrf_exempt
 @login_required
 def view_children(request):
     user = request.user
     children = user.childprofile_set.all()
+
+    # Delete child profile upon button press
+    if request.method == 'POST':
+        child_name = request.POST.get('child', None)
+        ChildProfile.objects.filter(name=child_name, parent=user).delete()
 
     return render(request, 'explorescotland/view_children.html', {'children': children})
 
@@ -106,6 +113,7 @@ def scot (request):
 
 def lily (request):
     return render(request, 'explorescotland/personaLily.html', {})
+    
 def googlemap(request):
     return render(request,'explorescotland/googlemap.html',{})
 

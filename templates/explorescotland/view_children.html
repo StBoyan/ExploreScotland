@@ -21,7 +21,9 @@
       <tr>
         <td>{{ child.name }}</td>
         <td>Level {{ child.level }}</td>
-        <td><form><input type=submit value="Delete" style="width:100%"></form></td>
+        <td><form id="delete_child_form" method="post" action="{% url 'view_children' %}">
+            <input type="hidden" name="child" value="{{ child.name }}">
+            <input type="submit" value="Delete"></form></td>
       </tr>
     {% endfor %}
     </table>
