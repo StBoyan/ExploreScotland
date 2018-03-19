@@ -1,0 +1,18 @@
+#map {
+        height:500px;
+        width:50%;
+        float:left;
+        overflow-y: scroll;
+        overflow-x:scroll;
+        background-color: #B0E0E6;
+         border: 3px solid black;
+       }
+       #textField{
+       height:500px;
+        width:49%;
+        float:right;
+        overflow-y: scroll;
+        overflow-x:scroll;
+        background-color: #B0E0E6;
+         border: 3px solid black;
+       }
