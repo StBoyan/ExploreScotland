@@ -13,15 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
-from django.conf.urls import include
-from explorescotland import views
 from registration.backends.simple.views import RegistrationView
+from django.contrib.auth import views
+from explorescotland import views
 
 class MyRegistrationView(RegistrationView):
     def get_sucess_url(self, user):
-        return '/explorescotland/' #TODO need to change this to wherever the user lands after they register
+        return '/explorescotland/'
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
@@ -29,9 +29,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/register/$', MyRegistrationView.as_view(), name='registration_register'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^Home/', views.userHomePage, name='homePage'), # TODO All patterns below need to be deleted from here
-    url(r'^Scot/', views.scot, name='scot'),
-    url(r'^Lily/', views.lily, name='lily'),
-    url(r'^googlemap/',views.googlemap,name='googlemap'),
+    url(r'^auth/', include('social_django.urls', namespace='social')),
 
 ]

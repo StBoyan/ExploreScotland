@@ -14,4 +14,11 @@
     {{ form.as_p }}
     <input type="submit" value="Submit" />
   </form>
+<br /> 
+  <div class="buttonParent">
+      <button class="btn btn-primary"
+      onClick="location.href='{% url 'social:begin' 'google-oauth2' %}'">
+      Register with Google
+  </button>
+
 {% endblock %}

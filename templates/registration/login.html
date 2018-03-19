@@ -16,7 +16,12 @@
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
   <p>
+    Log in with
+    <a href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
+  </p>
+  <p>
     Don't have an account?
     <a href="{% url 'registration_register' %}">Sign up</a>
   </p>
+
 {% endblock %}
