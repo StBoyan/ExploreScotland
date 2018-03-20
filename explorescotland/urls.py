@@ -15,10 +15,10 @@ urlpatterns = [
     url(r'^personaScot/', views.scot, name='scot'),
     url(r'^personaLily/', views.lily, name='lily'),
     url(r'^googlemap/',views.googlemap,name='googlemap'),
-    url(r'^getLevelInformation/$',views.get_level_information, name ="get_level_information"),
 
     # Ajax Urls
-    url(r'^test_ajax/', views.test_ajax, name='test_ajax'),
     url(r'^quizzes/', views.getQuestion, name='quizzes'),
+    url(r'^level/', views.getChildLevel, name='level'),
+    url(r'^getLevelInformation/$', views.get_level_information, name="get_level_information"),
 
 ]
