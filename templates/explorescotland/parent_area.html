@@ -1,4 +1,5 @@
 {% extends 'explorescotland/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
   Parent Area
@@ -32,4 +33,8 @@ Parent Area
       onClick="location.href='{% url 'manage_children' %}'">
       Manage Your Children
   </button>
+
+      <div class="picture">
+      <img src="{% static "img/family.png" %}" alt="Scot & LiLy say goodbye"/>
+  </div>
 {% endblock %}
