@@ -24,6 +24,8 @@
 
   <div class="topnav">
     <a href={% url 'home' %}>Home</a>
+    <a href={% url 'about' %}>About</a>
+
 
     {% if user.is_authenticated %}
     <a href={% url 'googlemap' %}>Explore - Interactive Map</a>
@@ -36,8 +38,7 @@
     <a href={% url 'auth_login' %}>Login</a>
     <a href={% url 'registration_register' %}>Sign Up</a>
     {% endif %}
-    <a href={% url 'about' %}>About</a>
-
+      
 
   </div>
 

@@ -10,29 +10,38 @@ Parent Area
 {% endblock %}
 
 {% block body_block %}
-  <br /> If you are reading this you are probably logged in.
-  <br /> It it still under construction. Here you can adjust profile settings and view your kids' performance.
-  </button>
-  <div class="buttonParent">
-      <button class="btn btn-primary"
-      onClick="location.href='{% url 'view_profile' %}'">
+ <link rel="stylesheet" href="{% static 'css/parents.css' %}">
+<div class="panel panel-info parent-info">
+    <h3>If you are reading this you are probably logged in.</h3>
+    <h3>Here you can adjust profile settings and view your kids' performance.</h3>
+</div>
+
+      <br></br>
+     <div class="buttonforms">
+     <button type="button" class="btn btn-info btn-block" onClick="location.href='{% url 'view_profile' %}'">
       View Profile
-  </button>
-  <div class="buttonParent">
-      <button class="btn btn-primary"
-      onClick="location.href='{% url 'auth_password_change' %}'">
+     </button>
+
+
+
+    <button type="button" class="btn btn-info btn-block" onClick="location.href='{% url 'auth_password_change' %}'">
       Change Password
-  </button>
-  <div class="buttonParent">
-      <button class="btn btn-primary"
-      onClick="location.href='{% url 'feedback' %}'">
+      </button>
+
+
+
+
+     <button class="btn btn-info btn-block" onClick="location.href='{% url 'feedback' %}'">
       Leave Feedback
-  </button>
-  <div class="buttonParent">
-      <button class="btn btn-primary"
-      onClick="location.href='{% url 'manage_children' %}'">
+     </button>
+
+
+
+     <button class="btn btn-info btn-block" onClick="location.href='{% url 'manage_children' %}'">
       Manage Your Children
-  </button>
+     </button>
+     </div>
+
 
       <div class="picture">
       <img src="{% static "img/family.png" %}" alt="Scot & LiLy say goodbye"/>
