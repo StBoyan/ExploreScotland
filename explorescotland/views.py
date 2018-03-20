@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
 
 def home(request):
     return render(request, 'explorescotland/home.html', {})
@@ -29,7 +30,7 @@ def feedback(request):
 
         if form.is_valid():
             form.save(commit=True)
-            return HttpResponseRedirect(reverse('parent_area')) #Can make this redirect to a thank you page
+            return HttpResponseRedirect(reverse('parent_area'))
         else:
             print(form.errors)
 
@@ -38,6 +39,7 @@ def feedback(request):
 @login_required
 def view_profile(request):
     context_dict = {}
+    # Gets user and ParentProfile instances
     user = request.user
     parent = ParentProfile.objects.get(user=user)
 
@@ -49,8 +51,10 @@ def view_profile(request):
 @login_required
 def edit_profile(request):
     context_dict ={}
+    # Gets form for User attributes
     user_form = UserForm(instance=request.user)
     context_dict['user_form'] = user_form
+    # Gets form for user's ParentProfile attributes
     parent = ParentProfile.objects.get(user=request.user)
     profile_form = ProfileForm(instance=parent)
     context_dict['profile_form'] = profile_form
@@ -63,7 +67,7 @@ def edit_profile(request):
             user_form.save(commit=True)
             profile_form.save(commit=True)
 
-            return HttpResponseRedirect(reverse('view_profile')) #Can redirect to confirmation page
+            return HttpResponseRedirect(reverse('view_profile')) 
         else:
             print(user_form.errors, profile_form.errors)
 
@@ -80,7 +84,7 @@ def add_child(request):
 
         if form.is_valid():
             form.save(commit=True)
-            return HttpResponseRedirect(reverse('parent_area')) #Can make this redirect to a confirmation page
+            return HttpResponseRedirect(reverse('manage_children'))
         else:
             print(form.errors)
 
@@ -90,10 +94,16 @@ def add_child(request):
 def manage_children(request):
     return render(request, 'explorescotland/manage_children.html', {})
 
+@csrf_exempt
 @login_required
 def view_children(request):
     user = request.user
     children = user.childprofile_set.all()
+
+    # Delete child profile upon button press
+    if request.method == 'POST':
+        child_name = request.POST.get('child', None)
+        ChildProfile.objects.filter(name=child_name, parent=user).delete()
 
     return render(request, 'explorescotland/view_children.html', {'children': children})
 
@@ -109,7 +119,6 @@ def lily (request):
 def googlemap(request):
     return render(request,'explorescotland/googlemap.html',{})
 
-
 # Test AJAX thing to show you how it works
 def test_ajax(request):
     return HttpResponse("This is text from the server!!")
@@ -117,7 +126,6 @@ def test_ajax(request):
 def getQuestion(request):
     data = serializers.serialize('json', QuizQuestion.objects.all())
     return HttpResponse(data, content_type="application/json")
-
 
 def get_level_information(request):
     level_id = None

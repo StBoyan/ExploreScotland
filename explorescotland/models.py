@@ -10,6 +10,7 @@ class ParentProfile(models.Model):
     ('F', 'Female'),
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # Gender is stored as a single char, with each corresponding to a gender
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default ='')
     birthdate = models.DateField(null=True)
 
@@ -30,27 +31,25 @@ class ChildProfile(models.Model):
         return self.name
 
 class Level(models.Model):
-    number = models.IntegerField(primary_key=True) # E.g. "1"
-    topic = models.CharField(max_length=50, unique=True) # E.g. "Glasgow"
-    content = models.TextField(null=False) # E.g. "Glasgow is the biggest city in Scotland..."
-    numOfQuestions = models.IntegerField(null=False) # How many questions will this level have
+    number = models.IntegerField(primary_key=True)
+    topic = models.CharField(max_length=50, unique=True)
+    content = models.TextField(null=False)
+    numOfQuestions = models.IntegerField(null=False)
 
     def __str__(self):
         return str(self.number)
 
 class QuizQuestion(models.Model):
-    question_id = models.IntegerField(primary_key=True) # E.g. 1,2,3.. Up to number of questions for the relevant Level (not enforced by database)
-    question = models.CharField(max_length=128, unique=True) # E.g. "When was University of Glasgow established?"
-    correctAnswer = models.CharField(max_length=128) # E.g. "1451"
-    incorrectAnswer1 = models.CharField(max_length=128) # E.g "1285"
-    incorrectAnswer2 = models.CharField(max_length=128) # E.g. "1613"
-    incorrectAnswer3 = models.CharField(max_length=128) # E.g. "1771"
+    question_id = models.IntegerField(primary_key=True)
+    question = models.CharField(max_length=128, unique=True)
+    correctAnswer = models.CharField(max_length=128)
+    incorrectAnswer1 = models.CharField(max_length=128)
+    incorrectAnswer2 = models.CharField(max_length=128)
+    incorrectAnswer3 = models.CharField(max_length=128)
     level = models.ForeignKey(Level)
 
     def __str__(self):
         return self.question
-
-
 
 # Creates ParentProfile object when creating a new User
 @receiver(post_save, sender=User)

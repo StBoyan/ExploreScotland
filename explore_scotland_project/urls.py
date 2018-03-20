@@ -19,6 +19,7 @@ from registration.backends.simple.views import RegistrationView
 from django.contrib.auth import views
 from explorescotland import views
 
+# Redirect link upon successful registration
 class MyRegistrationView(RegistrationView):
     def get_sucess_url(self, user):
         return '/explorescotland/'
