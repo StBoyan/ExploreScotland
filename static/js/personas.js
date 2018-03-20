@@ -4,13 +4,6 @@ $(document).ready(function() {
         hideStart();
 
         startGame();
-        //    questions1();
-        //    console.log(questionsLevel1);
-        //drawQuestion(question.question);
-        //updateAnswers("zaiche", question.incorrectAnswer1, question.incorrectAnswer2, question.incorrectAnswer3);
-        //response();
-        //drawQuizEnd();
-
     })
 });
 
@@ -63,7 +56,7 @@ function drawQuestion() {
 
 function drawAnswerButtons() {
 
-    // clear
+    // clear the buttons
     clearAnswers();
 
     console.log(questions[currentQuestion]);
@@ -76,10 +69,10 @@ function drawAnswerButtons() {
     answers[2] = '<input type="button" value="' + question.incorrectAnswer2 + '">';
     answers[3] = '<input type="button" value="' + question.incorrectAnswer3 + '">';
 
-    // shuffle
+    // shuffles (randomizes) the answers
     answers.sort(function() { return 0.5 - Math.random() });
 
-    //draw
+    // concatenates 
     $('#answerGroup').append(answers.join("\n"));
 
     $('#answerGroup input').click(function () {
@@ -88,13 +81,20 @@ function drawAnswerButtons() {
     );
 }
 
-
+/**
+    Clears the buttons
+**/
 function clearAnswers() {
     $('#answerGroup').empty();
 }
 
 
-
+/**
+    Calls the method to display the response
+    increments the number of correct answers
+    if the answer is correct
+    and triggers the new questions
+**/
 function processAnswer(text) {
     console.log(text);
 
@@ -115,11 +115,20 @@ function processAnswer(text) {
     }
 }
 
+/**
+ @return true if the current
+ round is complete
+ **/
 function gameFinished() {
     let nextQuestion = questions[currentQuestion].fields;
     return nextQuestion.level === currentLevel + 1;
 }
 
+/**
+Visualize the answer from
+the user in the chat box
+@param user's answer
+**/
 function drawAnswer(text) {
     let answer = '<div class="panel-body2">' +
         ' <p>' + text + '</p> ' +
@@ -128,6 +137,11 @@ function drawAnswer(text) {
     $('.card').append(answer);
 }
 
+/**
+Visualize the message for the
+end of the quiz along with the
+user's score
+**/
 function drawQuizEnd() {
     let finale = '<div class="panel-body">' +
         ' <p>';
@@ -143,117 +157,3 @@ function drawQuizEnd() {
     $('.card').append(finale);
 }
 
-
-/**
-Ajax method to retrieve the child's
-level from the database
-**/
-function getLevel() {
-    $.ajax({
-        url: '/explorescotland/level',
-        success: function(data) {
-            level = data;
-        }
-    });
-};
-
-/**
- Filters and stores in an array
- all questions for level 1
- **/
-
-//    function questions1(level){
-//        return level == 1;
-//    }
-//
-//    questionsLevel1 = question.filter(questions1);
-/**
-Filters and stores in an array
-all questions for level 2
-**/
-//    function questions2(level){
-//        return level == 2;
-//    }
-//
-//    questionsLevel2 = question.filter(questions2);
-
-/**
-Filters and stores in an array
-all questions for level 3
-**/
-
-//    function questions3(level){
-//        return level == 3;
-//    }
-//
-//    questionsLevel3 = question.filter(questions3);
-
-
-/**
-Filters and stores in an array
-all questions for level 4
-**/
-
-//    function questions4(level){
-//        return level == 4;
-//    }
-//
-//    questionsLevel4 = question.filter(questions4);
-
-/**
-Filters and stores in an array
-all questions for level 5
-**/
-
-//    function questions5(level){
-//        return level == 5;
-//    }
-//
-//    questionsLevel5 = question.filter(questions5);
-
-/**
-Filters and stores in an array
-all questions for level 6
-**/
-
-//    function questions6(level){
-//        return level == 6;
-//    }
-//
-//    questionsLevel6 = question.filter(questions6);
-
-
-/** Methods responsible for the
-visual representation to the user**/
-
-// Displays the question in the chatbox
-
-// Displays the answer in the chatbox
-
-
-/** Draws a message for the end of the quiz**/
-
-
-// Keep track of the correct and incorrect answers of the current quiz/conversation
-function storeScore(answer) { //TODO reconsider.... perhaps check answer's id to see if it is correct
-
-    if (answer.id == question.correctAnswer) { //TODO edit
-        correctAnswers++;
-    }
-}
-
-/** Keeps track of the child's level **/
-function storeLevel() {
-    if (correctAnswers == 5) {
-        level++;
-    }
-}
-
-
-function response() {
-    $('input').click(function() {
-        console.log("button clicked")
-        drawRespond(this.value);
-        resetAnswers();
-    });
-}
