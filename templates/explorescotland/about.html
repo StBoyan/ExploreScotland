@@ -1,4 +1,5 @@
 {% extends 'explorescotland/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
   About
@@ -9,6 +10,54 @@
 {% endblock %}
 
 {% block body_block %}
-<br /> This project has been put together by Boyan Stoynov, Denitsa Velichkova, Diliyana Savcheva for the ITECH module.
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+
+<div class="left">
+ <div class="logo">
+     <img src="{% static "img/explore.png" %}" alt="Site's picture"/>
+ </div>
+    <div class="card">
+<br /> This project has been put together by: <br>
+    Boyan Stoynov, Denitsa Velichkova & Diliyana Savcheva <br>
+        for the ITECH module.
 <br /> It's purpose is to educate kids about Scotland.
+</div>
+
+</div>
+
+<div class="right">
+    <div class="card"></div>
+<h1> Our Initiative: </h1>
+Join our initiative! Nowadays our kids are exposed to the new technological
+    innovations and we cannot stop them from using the perks of the market.
+    Most of the applications available are repetitive in functionaries and they are not
+    educative. We want to be different and we designed an application, which is going to engage
+    the new generations with valuable information and develop their learning skills.
+    Your kid will be presented with a map with different signs on it which will represent
+    different information about the places in Scotland. Then they can check what they have learned
+    by talking to/taking quizzes from their virtual friends Scott and Lily. Our virtual personas
+    are designed to test your kids knowledge, acquired from exploring the interactive map.
+    Since the kids are young to subscribe to an online application you are the only one who can sign
+    them up and check their progress(levels). At an early stage, given the right parental direction,
+    a kid could develop valuable knowledge about this beautiful country.
+        {% if user.is_authenticated %}
+    Thank you for being a valuable part of our community!
+        {% else %}
+
+    If you like what we are doing here
+    please sign up your kid(s) for our educative platform by selecting the Sign Up button.
+      <div class="buttonParent">
+      <button class="btn btn-primary"
+      onClick="location.href='{% url 'view_profile' %}'">
+      Sign Up Here!
+  </button>
+
+</div>
+
+        {% endif %}
+
+<br/>
+
+</div>
+
 {% endblock %}
