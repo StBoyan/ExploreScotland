@@ -32,7 +32,10 @@
         background-color: white;
         border:1px solid black;
         float:left;
-        padding: 6px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        width:50%;
     }
 
     .imagePersona{
@@ -40,14 +43,36 @@
     }
 
     .panel-body2{
-        background-color: #FFB6C1;
-        border:1px solid black;
+        background-color: #00BFFF;
+        border:1px solid white;
         float:right;
         border-radius: 25px;
-        padding: 6px;
+        padding-left: 20px;
+        padding-right: 20px;
+        width:50%;
+
     }
 
     .buttons{
             border:3px solid black;
+
+    }
+
+    input[type=button] {
+    padding:5px;
+    border:2px solid white;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width:49%;
+    background-color: #00BFFF;
+}
+
+.panel-body3{
+        background-color: white;
+        border:1px solid black;
+        float:center;
+        border-radius: 25px;
+        padding: 30px;
+        width:93%;
 
     }

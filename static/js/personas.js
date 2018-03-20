@@ -1,17 +1,20 @@
 $(document).ready(function(){
 // TODO put in a loop
-getQuestions();
-    drawQuestion("Koe e nai sladkoto <3 :D ");
-    updateAnswers("maimunka", "kuchence", "zaiche", "mishlence");
+$('#btnStart').click(function(){
+    $(this).hide();
 
-    $('input').click(function () {
-            console.log("button clicked")
-                drawRespond(this.value);
-                resetAnswers();
-                console.log();
-            }
-    );
-    console.log(question);
+//    for ( i = 0; i<=5; i++){
+    getQuestions();
+    response();
+//    }
+    drawQuizEnd();
+
+})
+
+//    drawQuestion(getQuestions.question);
+//    updateAnswers(getQuestions.correctAnswer, getQuestions.incorrectAnswer1, getQuestions.incorrectAnswer2, getQuestions.incorrectAnswer3);
+
+
 });
 
     var correctAnswers;
@@ -57,24 +60,6 @@ getQuestions();
     $("#btn4").attr('value', 'Option4');
  }
 
-
-// Do I really need that? Pfff :D
- function getResponse(answer){
-    $.ajax({
-            type: "GET",
-            url: "" + answer, //TODO QUE?
-            success: function () {
-               //TODO
-
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("Status: " + textStatus);
-                alert("Error: " + errorThrown);
-            }
-        });
- }
-
-
 // Keep track of the correct and incorrect answers of the current quiz/conversation
  function storeScore(answer){ //TODO reconsider.... perhaps check answer's id to see if it is correct
 
@@ -87,18 +72,37 @@ getQuestions();
 
  function getQuestions (){
 
- $('#btn1').click(function() {
-        alert("woop woop");
-
     $.ajax({
     url: '/explorescotland/quizzes/',
     success: function(data) {
     question = data;
+    drawQuestion(question.question);
+    updateAnswers(question.correctAnswer, question.incorrectAnswer1, question.incorrectAnswer2, question.incorrectAnswer3);
     }
-    });
 
     });
  };
+
+function response(){
+$('input').click(function () {
+            console.log("button clicked")
+                drawRespond(this.value);
+                resetAnswers();
+                console.log();
+            }
+    );
+}
+ function drawQuizEnd(){
+    let finale = '<div class="panel-body">' +
+                    ' <p>';
+    if (correctAnswers == 5){
+        finale+="Congratulations! You answered correctly on all my questions. You progress to the next level!" + '</p> ' + '</div>';
+    }
+    else {
+        finale+= "Thank you! It was lovely talking to you today! Your score from the quiz is " + correctAnswers +'</p>' + '</div>';
+    }
+   $('.card').append(finale);
+ }
 
 
 $(document).ready(function() {
