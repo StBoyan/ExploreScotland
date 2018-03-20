@@ -129,7 +129,6 @@ def getChildLevel(request):
 
 def get_level_information(request):
     level_id = None
-    print("reeeequest", request)
     if request.method == 'GET':
         level_id = request.GET['level_id']
 
@@ -138,7 +137,14 @@ def get_level_information(request):
         level = Level.objects.get(number=int(level_id))
         if level:
             text = level.content
-            print("textttttt", text)
-
 
     return JsonResponse({'content' : text})
+
+def get_level_for_map(request):
+    level = Level.objects.all().count()
+    child = ChildProfile.objects.filter(parent = request.user).order_by('-level')
+
+    if child:
+       level = child[0].level
+
+    return JsonResponse({'currentLevel' : level})

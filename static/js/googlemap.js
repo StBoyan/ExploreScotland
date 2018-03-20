@@ -1,9 +1,21 @@
 $(document).ready(function() {
-    initMap();
+    var childLevel = 1
+    $.ajax({
+        url: '../getLevelForMap',
+        success: function(response) {
+            childLevel = response.currentLevel;
+        }
+    });
+
+
+    setTimeout(function() {
+        initMap(childLevel);
+    }, 500)
+
 });
 
 
-function initMap() {
+function initMap(childLevel) {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {
             lat: 57.113387,
@@ -12,8 +24,6 @@ function initMap() {
         zoom: 7,
         gestureHandling: 'none'
     });
-
-
 
     var markers = [{
             "title": 'Glasgow',
@@ -43,8 +53,7 @@ function initMap() {
         }
     ];
 
-
-    for (var i = 0; i < markers.length; i++) {
+    for (var i = 0; i < childLevel; i++) {
         var data = markers[i];
         var myLatlng = new google.maps.LatLng(data.lat, data.lng);
         var marker = new google.maps.Marker({
@@ -53,13 +62,13 @@ function initMap() {
             title: data.title
         })
         marker.set('id', i + 1);
-        console.log(marker);
         marker.addListener('click', function() {
             handleClick(this)
         });
+    };
 
-    }
 }
+
 
 function handleClick(marker) {
     var id = marker.id;
@@ -69,10 +78,9 @@ function handleClick(marker) {
         data: {
             level_id: id
         },
+
         success: function(response) {
-
             $('#levelInfoTextField').html(response.content);
-
         }
     });
 }

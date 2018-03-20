@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^quizzes/', views.getQuestion, name='quizzes'),
     url(r'^level/', views.getChildLevel, name='level'),
     url(r'^getLevelInformation/$', views.get_level_information, name="get_level_information"),
+    url(r'^getLevelForMap/$', views.get_level_for_map, name="get_level_for_map"),
 
 ]

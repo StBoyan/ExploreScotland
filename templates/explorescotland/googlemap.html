@@ -12,16 +12,21 @@
 <div id="map"></div>
 
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4OKqDu4KBZloKYGO4c7RlJtLSLIK6Vvo&callback=initMap">
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD4OKqDu4KBZloKYGO4c7RlJtLSLIK6Vvo&">
     </script>
 
-<div id="levelInfoTextField">
+ <script src="{% static 'js/googlemap.js' %}"></script>
 
+<div id="levelInfoTextField">
+    <h1>Welcome to our interactive map!</h1><p>When you click on a red marker on the map of Scotland, a place to explore will appear.</p>
+<p>Be ready to learn new interesting things</p><p> The different markers will open in different levels.</p>
+    <p>The better you answer the questions by Scott or Lily,</p><p> the more markers will open until you become an expert in exploring Scotland!</p>
+    <h1>Enjoy your time!</h1>
+    <h1>Good luck!</h1>
 
 </div>
 
 
- <script src="{% static 'js/googlemap.js' %}"></script>
 {% endblock %}
 
 </body>
