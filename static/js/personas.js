@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // TODO put in a loop or smth
     $('#btnStart').click(function() {
         hideStart();
 
@@ -7,6 +6,9 @@ $(document).ready(function() {
     })
 });
 
+/**
+    Hide the introductory information and button
+**/
 function hideStart() {
 	$('#btnStart').hide();
     $('.panel-body3').hide();
@@ -19,9 +21,6 @@ var questions = [];
 var currentQuestion = 0;
 var currentLevel = 1;
 
-/**
-Methods that retrieve and manipulate data from the database
-**/
 
 /**
 Ajax method to retrieve all quiz
@@ -43,6 +42,10 @@ function startGame() {
     });
 };
 
+/**
+    Visualizes the questions by the personas in the
+    chat box
+**/
 function drawQuestion() {
     console.log(questions[currentQuestion]);
     let question = questions[currentQuestion].fields;
@@ -54,6 +57,9 @@ function drawQuestion() {
     $('.card').append(questionHtml);
 }
 
+/**
+    Displays the buttons with the possible answers
+**/
 function drawAnswerButtons() {
 
     // clear the buttons
@@ -72,7 +78,7 @@ function drawAnswerButtons() {
     // shuffles (randomizes) the answers
     answers.sort(function() { return 0.5 - Math.random() });
 
-    // concatenates 
+    // concatenates the randomized answers
     $('#answerGroup').append(answers.join("\n"));
 
     $('#answerGroup input').click(function () {
