@@ -3,3 +3,4 @@ explorescotland/migrations/
 __pycache__/
 *.pyc
 .idea/
+.coverage

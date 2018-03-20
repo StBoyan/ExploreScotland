@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from explorescotland.forms import FeedbackForm, UserForm, ProfileForm, ChildForm
-from explorescotland.models import Feedback, ParentProfile, ChildProfile, QuizQuestion,Level
+from explorescotland.forms import *
+from explorescotland.models import *
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse, JsonResponse
@@ -67,7 +67,7 @@ def edit_profile(request):
             user_form.save(commit=True)
             profile_form.save(commit=True)
 
-            return HttpResponseRedirect(reverse('view_profile')) 
+            return HttpResponseRedirect(reverse('view_profile'))
         else:
             print(user_form.errors, profile_form.errors)
 
