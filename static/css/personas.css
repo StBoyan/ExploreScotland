@@ -8,10 +8,15 @@
     }
 
     .picture{
-     border: 3px solid black;
+     border: 3px ridge black;
     background-color: white;
     width: 200px;
 
+    }
+
+    .name{
+    padding: 0px;
+    text-align: center;
     }
 
     .rightColumn{

@@ -1,4 +1,5 @@
 {% extends 'explorescotland/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
   Home
@@ -9,7 +10,32 @@
 {% endblock %}
 
 {% block body_block %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
-<br /> Group of highly trained monkeys are busy constructing this website.
+<div class="right">
+        {% if user.is_authenticated %}
+<h1>Welcome Back! Lovely to see you again!</h1>
+    What are you up to today? Talking to Scot? Or may be to Lily?
+    Do you feel like exploring? <br/> Choose your option from the bar above!
+        {% else %}
+<h1>
+    Thank you for visiting ExploreScotland!
+</h1>
+    If you are new to our website and would like
+    to learn more about it please select "About".<br/>
+    We would love you to become a part of our community!
+    Please sign up and register your children today! <br/>
+    If you are an existing user, we are delighted to see you back!
+    Please log in!
+
+    {% endif %}
+</div>
+
+<div class="left">
+    <div class="picture">
+<img src="{% static "img/ExploreScotland.png" %}" alt="Site's picture"/>
+    </div>
+</div>
+
 
 {% endblock %}

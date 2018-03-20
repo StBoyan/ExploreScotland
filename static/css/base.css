@@ -12,6 +12,7 @@ background-color:powderblue;
     .topnav{
       overflow: hidden;
       background-color: #1A5276;
+      text-align: center;
     }
 /* Style the navigation links */
     .topnav a {
