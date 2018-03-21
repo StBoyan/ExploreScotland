@@ -202,3 +202,12 @@ def set_child_session(request, child):
         request.session['child_session'] = child
     else:
         request.session['child_session'] = None
+
+# Store child's upgraded level
+def store_level(request):
+    child_name = request.session['child_session']
+    child = ChildProfile.objects.get(parent=request.user,name=child_name)
+    child.level = child.level + 1
+    child.save()
+    return JsonResponse({})
+

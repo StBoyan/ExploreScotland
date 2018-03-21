@@ -62,6 +62,20 @@ function startGame() {
     });
 };
 
+function storeLevel(value) {
+    //variable data = {identifier:value,}
+    $.ajax({
+        url: '/explorescotland/update/',
+        dataType: 'json',
+        type: 'POST',
+        data: data = currentLevel,
+        success: function(data) {
+
+        }
+
+    });
+};
+
 /**
     Visualizes the questions by the personas in the
     chat box
@@ -149,7 +163,6 @@ function processAnswer(text) {
  **/
 function gameFinished() {
     let nextQuestion = questions[currentQuestion].fields;
-    alert("Next Q level = " + nextQuestion.level + "current level =" + currentLevel);
     return nextQuestion.level === currentLevel + 1;
 }
 

@@ -21,5 +21,8 @@ urlpatterns = [
     url(r'^level/', views.getChildLevel, name='level'),
     url(r'^getLevelInformation/$', views.get_level_information, name="get_level_information"),
     url(r'^getLevelForMap/$', views.get_level_for_map, name="get_level_for_map"),
+    url(r'^levelUp/$', views.store_level, name="levelUp"),
+
+
 
 ]
