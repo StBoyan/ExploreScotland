@@ -12,17 +12,24 @@
 {% block body_block %}
  <link rel="stylesheet" href="{% static 'css/parents.css' %}">
   {% if child_session == None %}
-    <div class="child-info">
-      <h3> Get ready to Explore Scotland!! </h3>
-      <h3> Who is learning? </h3>
-    </div>
-    {% for child in children %}
-      <div class="buttons">
-        <form id="choose_child_form" method="post" action="{% url 'children_area' %}">
-            <input type="hidden" name="child" value="{{ child.name }}">
-            <input type="submit" value="{{ child.name }}"></form>
+    {% if not children.all %}
+      <div class="child-info">
+        <strong>You havent registered any children yet!</strong> <br/>
+        <a href="{% url 'add_child' %}">Add a child here</a>
       </div>
-    {% endfor %}
+    {% else %}
+      <div class="child-info">
+        <h3> Get ready to Explore Scotland!! </h3>
+        <h3> Who is learning? </h3>
+      </div>
+      {% for child in children %}
+        <div class="buttons">
+          <form id="choose_child_form" method="post" action="{% url 'children_area' %}">
+              <input type="hidden" name="child" value="{{ child.name }}">
+              <input type="submit" value="{{ child.name }}"></form>
+        </div>
+      {% endfor %}
+    {% endif %}
   {% else %}
   <div class="child-info">
     <h3> Hi <strong>{{ child_session }}</strong/>!! You are on level <strong>{{ level }}</strong>. </h3>
