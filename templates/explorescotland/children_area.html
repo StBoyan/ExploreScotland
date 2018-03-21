@@ -17,20 +17,27 @@
       <h3> Who is learning? </h3>
     </div>
     {% for child in children %}
-      <div class="buttons">
+      <div class="buttonforms">
         <form id="choose_child_form" method="post" action="{% url 'children_area' %}">
             <input type="hidden" name="child" value="{{ child.name }}">
             <input type="submit" value="{{ child.name }}"></form>
       </div>
     {% endfor %}
   {% else %}
-  <div class="child-info">
+    <div class="child-info">
     <h3> Hi <strong>{{ child_session }}</strong/>!! You are on level <strong>{{ level }}</strong>. </h3>
-    <br /><a href="{% url 'scot' %}">Talk to Scot!</a>
-    <br /><a href="{% url 'lily' %}">Talk to Lily!</a>
-    <br /><a href="{% url 'googlemap' %}">Learn on the map!</a>
-  </div>
-  <div class="buttons">
+</div>
+    <div class="buttonforms">
+    <button type="button"class="button btn-btn-info btn-block"
+      onClick="location.href='{% url 'add_child' %}'">
+        Talk to Scot
+    </button>
+       <button type="button"class="button btn-btn-info btn-block"
+      onClick="location.href='{% url 'add_child' %}'">
+        Talk to Lily
+    </button>
+    </div>
+  <div class="buttonforms">
     <form id="stop_child_session" method="post" action="{% url 'children_area' %}">
         <input type="hidden" name="child" value="end">
         <input type="submit" value="Give way to your sibling to play!"></form>
