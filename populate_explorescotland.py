@@ -4,7 +4,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 
 import django
 django.setup()
-from explorescotland.models import QuizQuestion, Level
+from explorescotland.models import ParentProfile, ChildProfile, QuizQuestion, Level
+from django.contrib.auth.models import User
 
 def populate():
 
@@ -142,6 +143,7 @@ def populate():
        for q in QuizQuestion.objects.filter(level=l):
             print("- {0} - {1}".format(l.topic, q.question))
 
+    add_test_parent_profile_and_child_profiles()
 
 def add_level(number, topic, content, numofquestions):
     level = Level.objects.get_or_create(number=number, numOfQuestions=numofquestions)[0]
@@ -151,7 +153,6 @@ def add_level(number, topic, content, numofquestions):
     level.save()
 
     return level
-
 
 
 def add_question(level, id, question, correct, incorrect1, incorrect2, incorrect3):
@@ -164,6 +165,23 @@ def add_question(level, id, question, correct, incorrect1, incorrect2, incorrect
    q.incorrectAnswer3 = incorrect3
    q.save()
    return q
+
+
+def add_test_parent_profile_and_child_profiles():
+    print("- Creating new User : David ")
+    new_user = User.objects.create_user(username='David',email='davidmcgnee@gmail.com',password='braveHeart77')
+    new_user.save()
+
+    print("- Creating new Parent Profile for user : David")
+    parent = ParentProfile.objects.get_or_create(user=new_user)[0]
+    parent.save()
+
+    print("- Creating Child Profiles for Parent : Danielle and John")
+    child1 = ChildProfile.objects.get_or_create(parent=new_user, name="Danielle", level=1)[0]
+    child2 = ChildProfile.objects.get_or_create(parent=new_user, name="John", level=6)[0]
+
+    child1.save()
+    child2.save()
 
 
 
