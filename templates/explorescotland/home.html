@@ -26,7 +26,15 @@
         {% if user.is_authenticated %}
 <h1>Welcome Back! Lovely to see you again!</h1>
     What are you up to today? Talking to Scot? Or may be to Lily?
-    Do you feel like exploring? <br/> Choose your option from the bar above!
+    Do you feel like exploring? <br/> Choose your profile from the button below !
+
+
+    <div class="buttonParent">
+      <button class="btn btn-primary"
+      onClick="location.href='{% url 'children_area' %}'">
+      Play Time! <br/> (Child Area)
+  </button>
+    </div>
         {% else %}
 <h1>
     Thank you for visiting ExploreScotland!
