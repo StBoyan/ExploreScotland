@@ -1,4 +1,5 @@
 {% extends 'explorescotland/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
   Children Area
@@ -9,21 +10,33 @@
 {% endblock %}
 
 {% block body_block %}
+ <link rel="stylesheet" href="{% static 'css/children.css' %}">
   {% if child_session == None %}
-    <p> Get ready to Explore Scotland!! </p>
-    <p> Who is learning? <p>
+    <div class="child-info">
+      <h3> Get ready to Explore Scotland!! </h3>
+      <h3> Who is learning? </h3>
+    </div>
     {% for child in children %}
-      <form id="choose_child_form" method="post" action="{% url 'children_area' %}">
-          <input type="hidden" name="child" value="{{ child.name }}">
-          <input type="submit" value="{{ child.name }}"></form>
+      <div class="buttons">
+        <form id="choose_child_form" method="post" action="{% url 'children_area' %}">
+            <input type="hidden" name="child" value="{{ child.name }}">
+            <input type="submit" value="{{ child.name }}"></form>
+      </div>
     {% endfor %}
   {% else %}
-  <p> Hi {{ child_session }}!! You are on level {{ level }}. </p>
-  <br /><a href="{% url 'scot' %}">Talk to Scot!</a>
-  <br /><a href="{% url 'lily' %}">Talk to Lily</a>
-  <br /><a href="{% url 'googlemap' %}">Learn on the map!</a>
-  <form id="stop_child_session" method="post" action="{% url 'children_area' %}">
-      <input type="hidden" name="child" value="end">
-      <input type="submit" value="Give way to your sibling to play!"></form>
+  <div class="child-info">
+    <h3> Hi <strong>{{ child_session }}</strong/>!! You are on level <strong>{{ level }}</strong>. </h3>
+    <br /><a href="{% url 'scot' %}">Talk to Scot!</a>
+    <br /><a href="{% url 'lily' %}">Talk to Lily!</a>
+    <br /><a href="{% url 'googlemap' %}">Learn on the map!</a>
+  </div>
+  <div class="buttons">
+    <form id="stop_child_session" method="post" action="{% url 'children_area' %}">
+        <input type="hidden" name="child" value="end">
+        <input type="submit" value="Give way to your sibling to play!"></form>
+  </div>
   {% endif %}
+  <div class="picture">
+    <img src="{% static "img/family.png" %}" alt="Scot & LiLy say goodbye"/>
+  </div>
 {% endblock %}
