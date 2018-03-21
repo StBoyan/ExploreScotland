@@ -166,7 +166,6 @@ def add_level(number, topic, content, numofquestions):
 
 
 def add_question(level, id, question, correct, incorrect1, incorrect2, incorrect3):
-   print("trying to create question with id: ", id, "for level: ", level.number)
    q = QuizQuestion.objects.get_or_create(question_id=id, level = level)[0]
    q.question = question
    q.correctAnswer = correct

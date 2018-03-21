@@ -25,7 +25,7 @@ SECRET_KEY = '_laefn$72mce5w^11gg(dwyt7_w7kygf3q)1*rgm92s=w+7dxu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
- # TODO change to False !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 # Allow any host to establish connection
 ALLOWED_HOSTS = ['*']
 

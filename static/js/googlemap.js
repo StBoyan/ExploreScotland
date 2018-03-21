@@ -14,7 +14,7 @@ $(document).ready(function() {
 
 });
 
-
+/** Loading Google Map**/
 function initMap(childLevel) {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {
@@ -53,6 +53,7 @@ function initMap(childLevel) {
         }
     ];
 
+// updates the markers based on kids level
     for (var i = 0; i < childLevel; i++) {
         var data = markers[i];
         var myLatlng = new google.maps.LatLng(data.lat, data.lng);
@@ -69,7 +70,7 @@ function initMap(childLevel) {
 
 }
 
-
+/** Handles the response to a click on the database **/
 function handleClick(marker) {
     var id = marker.id;
     $.ajax({
