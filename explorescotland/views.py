@@ -40,7 +40,7 @@ def feedback(request):
 @login_required
 def view_profile(request):
     context_dict = {}
-    # Gets user and ParentProfile instances
+    # Gets current User and ParentProfile instances
     user = request.user
     parent = ParentProfile.objects.get(user=user)
 
@@ -114,14 +114,19 @@ def view_children(request):
 def children_area(request):
     context_dict = {}
     user = request.user
+    # Gets all children of current user
     children = user.childprofile_set.all()
     context_dict['children'] = children
 
+    # Tries to get the name of the current child's session
     try:
         child_name = request.session['child_session']
+    # If not assigned, assign None
     except KeyError:
         child_name = None
 
+    # If there is a child's session, get the ChildProfile object
+    # and its level
     if child_name is not None:
         child_instance = ChildProfile.objects.get(parent=user, name=child_name)
         context_dict['level'] = child_instance.level
@@ -130,11 +135,14 @@ def children_area(request):
 
     context_dict['child_session'] = child_name
 
-
+    # If POST then update child session
     if request.method == 'POST':
+        # get selected child name
         child_session = request.POST.get('child', None)
+        # If child wants to log out, assign None
         if child_session == 'end':
             set_child_session(request, None)
+        # Else assign the child name to the session
         else:
             set_child_session(request, child_session)
         return HttpResponseRedirect(reverse('children_area'))
@@ -178,7 +186,9 @@ def get_level_information(request):
     return JsonResponse({'content' : text})
 
 def get_level_for_map(request):
+    # Get child name from session
     child_name = request.session['child_session']
+    # Get child object associated
     child = ChildProfile.objects.get(parent=request.user, name=child_name)
     level = child.level
 
