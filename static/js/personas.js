@@ -201,8 +201,7 @@ function drawQuizEnd() {
     if (correctAnswers == 5) {
 
         finale += "Congratulations! You answered correctly on all my questions. You progress to the next level!" +
-        " Go and check what is new for you in our Interactive Map and come back for me to test you on your new knowledge!
- " +
+        ' Go and check what is new for you in our Interactive Map and come back for me to test you on your new knowledge!' +
             '</p> ' + '</div>';
     } else {
         finale += "Thank you! It was lovely talking to you today! Your score from the quiz is " +
