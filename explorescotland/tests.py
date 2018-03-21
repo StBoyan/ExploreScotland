@@ -9,7 +9,7 @@ from django.test.client import Client
 # Tests in this class test if pages are restricted to
 # authenticated users (i.e. if unauthenticated, user
 # gets redirected to another page)
-class UnauthenticatedAccessRedirectTests(TestCase):
+class UnauthenticatedAccessViewRedirectTests(TestCase):
     def test_parent_area_inacessible_without_login(self):
         response = self.client.get(reverse('parent_area'))
         self.assertEqual(response.status_code, 302)
@@ -36,6 +36,10 @@ class UnauthenticatedAccessRedirectTests(TestCase):
 
     def test_map_inacessible_without_login(self):
         response = self.client.get(reverse('googlemap'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_children_area_inacessible_without_login(self):
+        response = self.client.get(reverse('children_area'))
         self.assertEqual(response.status_code, 302)
 
 # Tests in this class test if forms process information
@@ -111,12 +115,59 @@ class AuthenticatedViewTests(TestCase):
 
     def test_lily_is_accessible_for_loggedin_user(self):
         response = self.client.get(reverse('lily'))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_scot_is_accessible_for_loggedin_user(self):
         response = self.client.get(reverse('scot'))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_googlemap_is_accessible_for_loggedin_user(self):
         response = self.client.get(reverse('googlemap'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_children_area_is_accessible_for_loggedin_user(self):
+        response = self.client.get(reverse('children_area'))
         self.assertEqual(response.status_code, 200)
+
+# Tests in this class test whether the view content
+# is displayed correctly
+class ViewContentTests(TestCase):
+    # Provides a test user instance
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.client = Client()
+        self.user = User.objects.create_user(
+                            username='John',
+                            email='john@test.com',
+                            password='test_password')
+        self.client.login(username='John', password='test_password')
+
+    def test_children_area_without_children(self):
+        response = self.client.get(reverse('children_area'))
+        self.assertContains(response, 'You havent registered any children yet!')
+        self.assertQuerysetEqual(response.context['children'], [])
+
+    def test_view_children_without_children(self):
+        response = self.client.get(reverse('view_children'))
+        self.assertContains(response, 'You havent registered any children yet!')
+        self.assertQuerysetEqual(response.context['children'], [])
+
+    def test_profile_page_displays_correct_data(self):
+        response = self.client.get(reverse('view_profile'))
+        self.assertEqual(response.context['user'], self.user)
+
+    def test_children_area_with_children(self):
+        add_child(self.user, 'Bobby')
+        response = self.client.get(reverse('children_area'))
+        self.assertTrue(response.context['children'] != [])
+
+    def test_view_children_with_children(self):
+        response = self.client.get(reverse('children_area'))
+        self.assertTrue(response.context['children'] != [])
+
+# Helper function to create child profile
+def add_child(parent, name):
+    child = ChildProfile.objects.get_or_create(parent=parent, name=name)[0]
+    child.save()
+
+    return child
