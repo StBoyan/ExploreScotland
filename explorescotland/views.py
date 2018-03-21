@@ -206,10 +206,8 @@ def set_child_session(request, child):
 @csrf_exempt
 # Store child's upgraded level
 def store_level(request):
-    # if request.method == 'POST':
     child_name = request.session['child_session']
     child = ChildProfile.objects.get(parent=request.user,name=child_name)
     child.level = child.level + 1
     child.save()
     return JsonResponse({})
-
