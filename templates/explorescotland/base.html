@@ -28,6 +28,7 @@
 
 
     {% if user.is_authenticated %}
+    <a href={% url 'children_area' %}>Children Area</a>
     <a href={% url 'googlemap' %}>Explore - Interactive Map</a>
     <a href={% url 'scot' %}>Talk to Scot</a>
     <a href={% url 'lily' %}>Talk to Lily</a>

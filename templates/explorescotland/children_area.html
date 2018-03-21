@@ -1,0 +1,29 @@
+{% extends 'explorescotland/base.html' %}
+
+{% block title_block %}
+  Children Area
+{% endblock %}
+
+{% block header_block %}
+ Children Area
+{% endblock %}
+
+{% block body_block %}
+  {% if child_session == None %}
+    <p> Get ready to Explore Scotland!! </p>
+    <p> Who is learning? <p>
+    {% for child in children %}
+      <form id="choose_child_form" method="post" action="{% url 'children_area' %}">
+          <input type="hidden" name="child" value="{{ child.name }}">
+          <input type="submit" value="{{ child.name }}"></form>
+    {% endfor %}
+  {% else %}
+  <p> Hi {{ child_session }}!! You are on level {{ level }}. </p>
+  <br /><a href="{% url 'scot' %}">Talk to Scot!</a>
+  <br /><a href="{% url 'lily' %}">Talk to Lily</a>
+  <br /><a href="{% url 'googlemap' %}">Learn on the map!</a>
+  <form id="stop_child_session" method="post" action="{% url 'children_area' %}">
+      <input type="hidden" name="child" value="end">
+      <input type="submit" value="Give way to your sibling to play!"></form>
+  {% endif %}
+{% endblock %}

@@ -59,6 +59,7 @@ def edit_profile(request):
     profile_form = ProfileForm(instance=parent)
     context_dict['profile_form'] = profile_form
 
+    # If user wants to update profile information
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=parent)
@@ -107,15 +108,47 @@ def view_children(request):
 
     return render(request, 'explorescotland/view_children.html', {'children': children})
 
-def userHomePage (request):
-    return render(request, 'explorescotland/userHomePage.html', {})
+@csrf_exempt
+@login_required
+def children_area(request):
+    context_dict = {}
+    user = request.user
+    children = user.childprofile_set.all()
+    context_dict['children'] = children
 
+    try:
+        child_name = request.session['child_session']
+    except KeyError:
+        child_name = None
+
+    if child_name is not None:
+        child_instance = ChildProfile.objects.get(parent=user, name=child_name)
+        context_dict['level'] = child_instance.level
+    else:
+        context_dict['level'] = None
+
+    context_dict['child_session'] = child_name
+
+
+    if request.method == 'POST':
+        child_session = request.POST.get('child', None)
+        if child_session == 'end':
+            set_child_session(request, None)
+        else:
+            set_child_session(request, child_session)
+        return HttpResponseRedirect(reverse('children_area'))
+
+    return render(request, 'explorescotland/children_area.html', context_dict)
+
+@login_required
 def scot (request):
     return render(request, 'explorescotland/personaScot.html', {})
 
+@login_required
 def lily (request):
     return render(request, 'explorescotland/personaLily.html', {})
 
+@login_required
 def googlemap(request):
     return render(request,'explorescotland/googlemap.html',{})
 
@@ -148,3 +181,10 @@ def get_level_for_map(request):
        level = child[0].level
 
     return JsonResponse({'currentLevel' : level})
+
+# Set child session on the server
+def set_child_session(request, child):
+    if child is not None:
+        request.session['child_session'] = child
+    else:
+        request.session['child_session'] = None
