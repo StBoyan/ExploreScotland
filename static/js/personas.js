@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('#btnStart').click(function() {
         hideStart();
 
-        startGame();
+        getLevel();
     })
 });
 
@@ -19,8 +19,28 @@ function hideStart() {
 var correctAnswers = 0;
 var questions = [];
 var currentQuestion = 0;
-var currentLevel = 1;
+var currentLevel = 0;
 
+/**
+Ajax method to retrieve child's
+level from the database
+**/
+
+function getLevel() {
+
+    $.ajax({
+        url: '/explorescotland/level/',
+        dataType: 'json',
+        type: 'GET',
+        success: function(data) {
+        let data2 = data[0]['fields'];
+            currentLevel = data2['level'];
+            currentQuestion = (currentLevel - 1) * 5;
+            startGame();
+        }
+
+    });
+};
 
 /**
 Ajax method to retrieve all quiz
@@ -48,8 +68,8 @@ function startGame() {
 **/
 function drawQuestion() {
     console.log(questions[currentQuestion]);
-    let question = questions[currentQuestion].fields;
 
+    let question = questions[currentQuestion].fields;
     let questionHtml = '<p>' + '<div class="panel-body">' +
         ' <p>' + question.question + '</p> ' +
         '</div>' + '</p>';
@@ -116,8 +136,10 @@ function processAnswer(text) {
         clearAnswers()
         drawQuizEnd();
     } else {
+        setTimeout(function(){
         drawQuestion();
         drawAnswerButtons();
+        }, 1500);
     }
 }
 
@@ -127,6 +149,7 @@ function processAnswer(text) {
  **/
 function gameFinished() {
     let nextQuestion = questions[currentQuestion].fields;
+    alert("Next Q level = " + nextQuestion.level + "current level =" + currentLevel);
     return nextQuestion.level === currentLevel + 1;
 }
 
@@ -136,9 +159,9 @@ the user in the chat box
 @param user's answer
 **/
 function drawAnswer(text) {
-    let answer = '<div class="panel-body2">' +
+    let answer = '<div class="float-left">' + '<div class="panel-body2">' +
         ' <p>' + text + '</p> ' +
-        '</div>';
+        '</div>' + '</div>';
 
     $('.card').append(answer);
 }

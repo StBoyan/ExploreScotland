@@ -169,7 +169,9 @@ def getQuestion(request):
     return HttpResponse(data, content_type="application/json")
 
 def getChildLevel(request):
-    data = serializers.serialize('json', ChildProfile.objects.all())
+    child_name = request.session['child_session']
+    child_instance = ChildProfile.objects.filter(parent=request.user, name=child_name)
+    data = serializers.serialize('json', child_instance)
     return HttpResponse(data, content_type="application/json")
 
 def get_level_information(request):

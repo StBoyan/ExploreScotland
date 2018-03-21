@@ -11,10 +11,9 @@
     <link rel="stylesheet" href="{% static 'css/personas.css' %}">
 
     <div class="leftColumn">
-        <div class="picture">
+
             {% block picture_block %}
             {% endblock %}
-        </div>
 
         <div class="name">
             {% block name_block %}
@@ -25,6 +24,7 @@
 
     <div class="rightColumn">
         <div class="card">
+            <div class="card-body">
             <div class="welcome">
                 <p><div class="panel-body3">Welcome! My name is {% block nm_block %} {% endblock %}. I am {% block age_block %}
                         {% endblock %}years old
@@ -32,8 +32,10 @@
                         Please note: this section requires you to have explored Scotland in the interactive map.
                         If you would like me to test what you have learned so far, please select the button below. </div></p>
             </div>
+
             <div class="startButton">
             <input type='button' value='Press here to start! ' id='btnStart'>
+            </div>
             </div>
             <div class="panel panel-default">
 
