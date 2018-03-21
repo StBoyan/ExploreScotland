@@ -1,4 +1,6 @@
 {% extends 'explorescotland/base.html' %}
+{%load staticfiles%}
+
 
 {% block title_block %}
   Children Management
@@ -9,15 +11,19 @@ Manage your Children
 {% endblock %}
 
 {% block body_block %}
-  <p> Here all kids belonging to the parent will be displayed along with a button to remove them. </p>
-  <div class="buttonParent">
-      <button class="btn btn-primary"
+ <link rel="stylesheet" href="{% static 'css/parents.css' %}">
+
+<div class="panel panel-info parent-info">
+  <h3> Here you can add the profiles of your kids and edit it them later. </h3>
+</div>
+  <div class="buttonforms">
+      <button type="button"class="button btn-btn-info btn-block"
       onClick="location.href='{% url 'add_child' %}'">
       Add Child
   </button>
-  <div class="buttonParent">
-      <button class="btn btn-primary"
+      <button type="button" class="btn btn-info btn-block"
       onClick="location.href='{% url 'view_children' %}'">
       View Children
   </button>
+      </div>
 {% endblock %}
