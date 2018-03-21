@@ -31,12 +31,24 @@
       {% endfor %}
     {% endif %}
   {% else %}
-  <div class="child-info">
-    <h3> Hi <strong>{{ child_session }}</strong/>!! You are on level <strong>{{ level }}</strong>. </h3>
-    <br /><a href="{% url 'scot' %}">Talk to Scot!</a>
-    <br /><a href="{% url 'lily' %}">Talk to Lily!</a>
-    <br /><a href="{% url 'googlemap' %}">Learn on the map!</a>
-  </div>
+      <div class="child-info">
+      <h3> Hi <strong>{{ child_session }}</strong/>!! You are on level <strong>{{ level }}</strong>. </h3></div>
+
+      <div class="buttonforms">
+           <button type="button"class="button btn-btn-info btn-block"
+      onClick="location.href='{% url 'scot' %}'">
+      You can now talk to your buddy Scot.
+           </button>
+            <button type="button"class="button btn-btn-info btn-block"
+      onClick="location.href='{% url 'lily' %}'">
+      You can now talk to your buddy Lily.
+           </button>
+     <button type="button"class="button btn-btn-info btn-block"
+      onClick="location.href='{% url 'googlemap' %}'">
+      You can explore new places on the map.
+           </button>
+
+      </div>
   <div class="buttons">
     <form id="stop_child_session" method="post" action="{% url 'children_area' %}">
         <input type="hidden" name="child" value="end">
