@@ -35,8 +35,12 @@ function getLevel() {
         success: function(data) {
         let data2 = data[0]['fields'];
             currentLevel = data2['level'];
-            currentQuestion = (currentLevel - 1) * 5;
-            startGame();
+            if (currentLevel == 6){
+                drawGameUnderConstruction();
+            } else {
+                currentQuestion = (currentLevel - 1) * 5;
+                startGame();
+            }
         }
 
     });
@@ -197,11 +201,22 @@ function drawQuizEnd() {
     if (correctAnswers == 5) {
 
         finale += "Congratulations! You answered correctly on all my questions. You progress to the next level!" +
+        " Go and check what is new for you in our Interactive Map and come back for me to test you on your new knowledge!
+ " +
             '</p> ' + '</div>';
     } else {
         finale += "Thank you! It was lovely talking to you today! Your score from the quiz is " +
-            correctAnswers + ' out of 5. In order to progress to the next level you need to score 5 out of 5. Good luck next time' +'</p>' + '</div>';
+            correctAnswers + ' out of 5. In order to progress to the next level you need to score 5 out of 5. Good luck next time' +'</p>' + '</div>' + '>';
     }
     $('.card').append(finale);
+}
+
+/** A method to signify the end of the levels**/
+function drawGameUnderConstruction (){
+    let message = '<div class="float-left">' + '<div class="panel-body2">' +
+        ' <p>' + "Congratulations! You have successfully completed all our levels! Stay tuned for more content soon!" + '</p> ' +
+        '</div>' + '</div>';
+
+    $('.card').append(message);
 }
 
