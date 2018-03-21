@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block body_block %}
- <link rel="stylesheet" href="{% static 'css/children.css' %}">
+ <link rel="stylesheet" href="{% static 'css/parents.css' %}">
   {% if child_session == None %}
     <div class="child-info">
       <h3> Get ready to Explore Scotland!! </h3>
@@ -37,6 +37,6 @@
   </div>
   {% endif %}
   <div class="picture">
-    <img src="{% static "img/family.png" %}" alt="Scot & LiLy say goodbye"/>
+    <img src="{% static "img/game.png" %}" alt="Scot & LiLy say goodbye"/>
   </div>
 {% endblock %}

@@ -22,3 +22,21 @@
     width: 30%;
     text-align: center;
 }
+
+.buttons{
+ width : 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    text-align: center;
+}
+
+.child-info{
+ width : 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 3px;
+    text-align: center;
+}

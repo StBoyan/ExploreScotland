@@ -1,6 +1,10 @@
 {% extends 'explorescotland/base.html' %}
 {% load staticfiles %}
 
+<!-- This file handles the view displayed in the home
+    page; It handles different visualization based on
+    whether the user is logged in or not -->
+
 {% block title_block %}
   Home
 {% endblock %}
@@ -10,8 +14,14 @@
 {% endblock %}
 
 {% block body_block %}
+  <!-- Linking a reference to the css for this template -->
+
   <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
+<!-- Displays the text on the home page
+    on the right hand side of the screen
+    and modifies the text based on whether
+    the user is logged in or not-->
 <div class="right">
         {% if user.is_authenticated %}
 <h1>Welcome Back! Lovely to see you again!</h1>
@@ -31,6 +41,9 @@
     {% endif %}
 </div>
 
+<!-- Displays the main image of the
+    Explore Scotland on the left hand side
+    of the view -->
 <div class="left">
     <div class="picture">
 <img src="{% static "img/ExploreScotland.png" %}" alt="Site's picture"/>

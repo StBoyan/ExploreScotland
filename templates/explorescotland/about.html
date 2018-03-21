@@ -1,6 +1,10 @@
 {% extends 'explorescotland/base.html' %}
 {% load staticfiles %}
 
+<!-- This file handles the view in the about section
+    and modifies the text based on whether the user
+    has been logged in or not -->
+
 {% block title_block %}
   About
 {% endblock %}
@@ -12,6 +16,9 @@
 {% block body_block %}
     <link rel="stylesheet" href="{% static 'css/about.css' %}">
 
+<!-- Displays Explore Scotland's picture along
+    with information about the project
+    on the left hand side of the view -->
 <div class="left">
  <div class="logo">
      <img src="{% static "img/explore.png" %}" alt="Site's picture"/>
@@ -25,6 +32,9 @@
 
 </div>
 
+<!-- Displays the project's initiative on the right hand side
+    of the view and modifies it based on whether the user is logged
+    in or not -->
 <div class="right">
     <div class="card"></div>
 <h1> Our Initiative: </h1>
