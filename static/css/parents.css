@@ -6,14 +6,6 @@
     margin-bottom: 3px;
     text-align: center;
 }
-.buttonforms{
-    width : 30%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    text-align: center;
-}
 
 .picture{
     display: block;
@@ -23,21 +15,26 @@
     text-align: center;
 }
 
-.buttons{
- width : 30%;
+.buttons, .edit, .feedback, .child-info, .buttonforms, .profile{
+    width : 30%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 3px;
     margin-bottom: 3px;
     text-align: center;
+    padding-top: 10px;
 }
 
-.child-info{
- width : 50%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    margin-bottom: 3px;
-    text-align: center;
+#table,{
+width: 100%;
+margin-left: auto;
+margin-right: auto;
+border:2px solid black;
+}
+
+th, td{
+border:1px solid black;
+padding-left: 50px;
+
 }
 

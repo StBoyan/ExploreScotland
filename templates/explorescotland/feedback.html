@@ -1,4 +1,5 @@
 {% extends 'explorescotland/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
   Feedback
@@ -9,7 +10,12 @@
 {% endblock %}
 
 {% block body_block %}
-  <br /> Your feedback is highly appreciated and will help us make the site better.
+<link rel="stylesheet" href="{% static 'css/parents.css' %}">
+  <div class="feedback">
+    <div class="alert alert-info" role="alert">
+Your feedback is highly appreciated and will help us make the site better.
+    </div>
+
   <form id="feedback_form" method="post" action="{% url 'feedback' %}">
     {% csrf_token %}
     {% for field in form.visible_fields %}
@@ -18,4 +24,5 @@
     {% endfor %}
     <input type="submit" name="submit" value="Leave Feedback" />
   </form>
+  </div>
 {% endblock %}

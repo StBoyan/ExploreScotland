@@ -1,4 +1,5 @@
 {% extends 'explorescotland/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
   Profile
@@ -9,6 +10,10 @@ View Profile
 {% endblock %}
 
 {% block body_block %}
+
+ <link rel="stylesheet" href="{% static 'css/parents.css' %}">
+
+<div class="profile">
   <p><strong>Username : {{ user.username }}</strong></p>
   <p>First Name : {{ user.first_name }}</p>
   <p>Last Name : {{ user.last_name }}</p>
@@ -20,4 +25,5 @@ View Profile
       onClick="location.href='{% url 'edit_profile' %}'">
       Edit Profile
   </button>
+  </div>
 {% endblock %}
