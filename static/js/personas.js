@@ -42,6 +42,7 @@ function getLevel() {
     });
 };
 
+
 /**
 Ajax method to retrieve all quiz
 questions from the database

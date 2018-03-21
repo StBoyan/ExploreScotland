@@ -13,7 +13,7 @@ Login to Explore Scotland
 
   <link rel="stylesheet" href="{% static 'css/authentication.css' %}">
 
- <div class="forms">
+ <div class="login">
   <form method="post" action=".">
     {% csrf_token %}
     {{ form.as_p }}

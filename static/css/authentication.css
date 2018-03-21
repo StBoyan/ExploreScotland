@@ -1,3 +1,12 @@
 .forms{
 margin-left: auto;
     margin-right: auto;}
+
+
+
+.register, .login, .changePass{
+margin: auto;
+width: 50%;
+padding-top: 10px;
+}
+
