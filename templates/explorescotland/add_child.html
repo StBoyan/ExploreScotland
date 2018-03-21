@@ -1,5 +1,5 @@
 {% extends 'explorescotland/base.html' %}
-
+{%load staticfiles%}
 {% block title_block %}
   Add Child
 {% endblock %}
@@ -9,7 +9,10 @@
 {% endblock %}
 
 {% block body_block %}
-  <br /> Your child's learning adventure begins here! Enter his or her name!
+ <link rel="stylesheet" href="{% static 'css/parents.css' %}">
+<div class="panel panel-parent">
+  <br /><h3>Your child's learning adventure begins here! Enter his or her name!</h3>
+</div>
   <form id="child_form" method="post" action="{% url 'add_child' %}">
     {% csrf_token %}
     {% for field in form.visible_fields %}
