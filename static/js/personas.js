@@ -66,7 +66,7 @@ function startGame() {
 function storeLevel(value) {
     //variable data = {identifier:value,}
     $.ajax({
-        url: '/explorescotland/update/',
+        url: '/explorescotland/levelUp/',
         dataType: 'json',
         type: 'POST',
         data: data = currentLevel,
@@ -148,8 +148,11 @@ function processAnswer(text) {
 
     let finished = gameFinished();
     if (finished) {
-        clearAnswers()
+        clearAnswers();
         drawQuizEnd();
+        if (correctAnswers === 5){
+        storeLevel();
+        }
     } else {
         setTimeout(function(){
         drawQuestion();
@@ -164,6 +167,9 @@ function processAnswer(text) {
  **/
 function gameFinished() {
     let nextQuestion = questions[currentQuestion].fields;
+    console.log(nextQuestion.level === currentLevel + 1);
+    console.log(nextQuestion.level);
+    console.log(currentLevel + 1);
     return nextQuestion.level === currentLevel + 1;
 }
 
@@ -190,12 +196,11 @@ function drawQuizEnd() {
         ' <p>';
     if (correctAnswers == 5) {
 
-        console.log("Call the backend to update the level of the user...");
         finale += "Congratulations! You answered correctly on all my questions. You progress to the next level!" +
             '</p> ' + '</div>';
     } else {
         finale += "Thank you! It was lovely talking to you today! Your score from the quiz is " +
-            correctAnswers + '</p>' + '</div>';
+            correctAnswers + ' out of 5. In order to progress to the next level you need to score 5 out of 5. Good luck next time' +'</p>' + '</div>';
     }
     $('.card').append(finale);
 }

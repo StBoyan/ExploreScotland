@@ -19,6 +19,7 @@ def populate():
          "incorrectAnswer2": "North Calder Water", "incorrectAnswer3": "Lavern Water", "level": "1"},
         {"question_id": 5, "question": "Who established Glasgow?", "correctAnswer": "St Mungo", "incorrectAnswer1": "Lord Kelvin",
          "incorrectAnswer2": "Queen Mary", "incorrectAnswer3": "Mackintosh", "level": "1"},
+
         {"question_id": 6, "question": "Which famous book was written in Edinburgh's cafes?", "correctAnswer": "Harry Potter", "incorrectAnswer1": "Hukleberry Finn",
          "incorrectAnswer2": "Animal farm", "incorrectAnswer3": "White Fang", "level": "2"},
         {"question_id": 7, "question": "Which magical creature can be found in Edinburgh?", "correctAnswer": "Unicorn", "incorrectAnswer1": "Dragon",
@@ -29,6 +30,7 @@ def populate():
          "incorrectAnswer2": "Adam Smith", "incorrectAnswer3": "Duke of Argyle", "level": "2"},
         {"question_id": 10, "question": "In which year was Edinburgh established?", "correctAnswer": "1130", "incorrectAnswer1": "1230",
          "incorrectAnswer2": "2018", "incorrectAnswer3": "230", "level": "2"},
+
         {"question_id": 11, "question": "Which is the legendary Loch Ness Monster?", "correctAnswer": "Nessie", "incorrectAnswer1": "Kraken",
          "incorrectAnswer2": "Fachen", "incorrectAnswer3": "Kelpie", "level": "3"},
         {"question_id": 12, "question": "Who is the first to see Nessie according to the oldest legend?", "correctAnswer": "St. Columbia", "incorrectAnswer1": "Marco Polo",
@@ -39,6 +41,7 @@ def populate():
          "incorrectAnswer2": "He is making Nessie to fall asleep", "incorrectAnswer3": "He is calling his clan", "level": "3"},
         {"question_id": 15, "question": "What happened when St. Columba told Nessie to drop the guy?", "correctAnswer": "She obeyed", "incorrectAnswer1": "She ate him",
          "incorrectAnswer2": "She laughed", "incorrectAnswer3": "She swam away", "level": "3"},
+
         {"question_id": 16, "question": "Which ship was built in Dundee in 1901?", "correctAnswer": "Discovery", "incorrectAnswer1": "Creature",
          "incorrectAnswer2": "Mistery", "incorrectAnswer3": "Conquer", "level": "4"},
         {"question_id": 17, "question": "Dundee is in which position based on its size in Scotland?", "correctAnswer": "4th", "incorrectAnswer1": "2nd",
@@ -49,6 +52,7 @@ def populate():
          "incorrectAnswer2": "20th century", "incorrectAnswer3": "16th century", "level": "4"},
         {"question_id": 20, "question": "What did Janet Keiller invent?", "correctAnswer": "Jam", "incorrectAnswer1": "Whale oil",
          "incorrectAnswer2": "jute", "incorrectAnswer3": "sugar", "level": "4"},
+
         {"question_id": 21, "question": "How is Aberdeen known as?", "correctAnswer": "The Granite City", "incorrectAnswer1": "The Stone City",
          "incorrectAnswer2": "The Iron City", "incorrectAnswer3": "The Cotton City", "level": "5"},
         {"question_id": 22, "question": "Aberdeen is also famous as a ###### capital of the world. In which industry?", "correctAnswer": "oil/ energy", "incorrectAnswer1": "whales",
@@ -59,6 +63,7 @@ def populate():
          "incorrectAnswer2": "Edward II of England", "incorrectAnswer3": "Edward IV of England", "level": "5"},
         {"question_id": 26, "question": "Stirling Bridge and Bannockburn are famous with:", "correctAnswer": "historical battles", "incorrectAnswer1": "music concerts",
          "incorrectAnswer2": "their architecture", "incorrectAnswer3": "nothing", "level": "5"},
+
         {"question_id": 25, "question": "What is the moto of the city?", "correctAnswer": "Bon accord (Good agreement)", "incorrectAnswer1": "To inspire and achieve",
          "incorrectAnswer2": "Natura Artis Magistra (Nature is the teacher of the art)", "incorrectAnswer3": "Semper Verum (Always true)", "level": "6"},
         {"question_id": 27, "question": "In 1297 William Wallace:", "correctAnswer": "won the battle at Stirling Bridge", "incorrectAnswer1": "won the battle at Bannockburn",
@@ -141,7 +146,7 @@ def populate():
         print(level)
         newLevel = add_level(level, level_data["topic"], level_data["content"], level_data["numOfQuestions"])
         for q in quiz_questions:
-            if (q["question_id"] <= len(levels.items()) * level and q["question_id"] > len(levels.items()) * (level-1)):
+            if (q["question_id"] < len(levels.items()) * level and q["question_id"] > len(levels.items()) * (level-1)):
                 add_question(newLevel, q["question_id"], q["question"], q["correctAnswer"], q["incorrectAnswer1"], q["incorrectAnswer2"], q["incorrectAnswer3"])
 
     for l in Level.objects.all():
