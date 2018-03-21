@@ -25,8 +25,9 @@ SECRET_KEY = '_laefn$72mce5w^11gg(dwyt7_w7kygf3q)1*rgm92s=w+7dxu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+ # TODO change to False !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Allow any host to establish connection
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -105,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Social authentication backends
+# Authentication backends include default backend and social authentication
 
 AUTHENTICATION_BACKENDS = (
  'social_core.backends.open_id.OpenIdAuth',
@@ -113,6 +114,8 @@ AUTHENTICATION_BACKENDS = (
  'social_core.backends.google.GoogleOAuth2',
  'django.contrib.auth.backends.ModelBackend',
 )
+
+# Google+ API keys
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1035325666960-q9ai00j0bj6jib86sch05ej53u8lt2cl.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'gZVVycS4KImawpqOKVR4j1fW'

@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
+from explorescotland.decorators import child_is_selected
 
 def home(request):
     return render(request, 'explorescotland/home.html', {})
@@ -141,14 +142,17 @@ def children_area(request):
     return render(request, 'explorescotland/children_area.html', context_dict)
 
 @login_required
+@child_is_selected
 def scot (request):
     return render(request, 'explorescotland/personaScot.html', {})
 
 @login_required
+@child_is_selected
 def lily (request):
     return render(request, 'explorescotland/personaLily.html', {})
 
 @login_required
+@child_is_selected
 def googlemap(request):
     return render(request,'explorescotland/googlemap.html',{})
 
@@ -174,11 +178,9 @@ def get_level_information(request):
     return JsonResponse({'content' : text})
 
 def get_level_for_map(request):
-    level = Level.objects.all().count()
-    child = ChildProfile.objects.filter(parent = request.user).order_by('-level')
-
-    if child:
-       level = child[0].level
+    child_name = request.session['child_session']
+    child = ChildProfile.objects.get(parent=request.user, name=child_name)
+    level = child.level
 
     return JsonResponse({'currentLevel' : level})
 
